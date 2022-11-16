@@ -6,7 +6,7 @@
 
 <script>
 export default {
-	name:'MoviePickView'
+	name:'MoviePickView',
 }
 </script>
 
