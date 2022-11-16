@@ -38,6 +38,7 @@
       <v-icon>mdi-open-in-new</v-icon>
     </v-btn>
     <router-link :to="{name:'moviepick'}" class="white--text">추천</router-link>
+    <router-link :to="{name:'moviepick'}" class="white--text">Login</router-link>
   </v-app-bar>
   
   <v-main>
