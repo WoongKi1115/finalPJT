@@ -44,8 +44,15 @@ export default {
           10752: "전쟁",
           37: "서부",
         },
-
     };
+  },
+  computed:{
+    popularMovies() {
+      return this.$store.getters.getPopular
+    },
+    recentMovies() {
+      return this.$store.getters.getRecent
+    }
   },
 	methods:{
 		getMovies() {
@@ -57,7 +64,9 @@ export default {
 				this.movies = res.data
 				this.getGenre()
 				this.$store.state.movies = this.movies
-				console.log(this.$store.state.movies)
+        // console.log(this.recentMovies)
+				// console.log(this.$store.state.movies)
+        // console.log(this.$store.getters.getPopular)
 			})
 			.catch((err) => {
 				console.log(err)
@@ -73,7 +82,7 @@ export default {
         }
         movie.genre_ids = newGenre
       }
-		}
+		},
 	},
 	created() {
 		this.getMovies()

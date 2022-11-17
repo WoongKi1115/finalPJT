@@ -15,11 +15,11 @@
       <v-spacer>
         
       </v-spacer>
-    <v-div>
+    <div>
       <router-link :to="{name:'moviepick'}" class="white--text mx-3">추천</router-link>
       <router-link :to="{name:'login'}" class="white--text mx-3">Login</router-link>
       <router-link :to="{name:'signup'}" class="white--text mx-3">회원가입</router-link>
-    </v-div>
+    </div>
   </v-app-bar>
   
   <v-main>
