@@ -1,13 +1,17 @@
 <template>
 	<div>
-		<p>{{popularMovie}}</p>
-		<!-- <v-row
-			class="fill-height"
-			align="center"
-			justify="center"
+		<v-sheet
+        height="100%"
+        tile
+      >
+		<v-row
+		class="fill-height"
+		align="center"
+		justify="center"
 		>
-			<img :src="'https://image.tmdb.org/t/p/original' + movie.poster_path" alt="">
-		</v-row> -->
+		<img :src="'https://image.tmdb.org/t/p/original' + popularMovie.poster_path" alt="">
+		</v-row>
+		</v-sheet>
 	</div>
 </template>
 
@@ -21,5 +25,7 @@ export default {
 </script>
 
 <style>
-
+img{
+	height: auto;	
+}
 </style>
