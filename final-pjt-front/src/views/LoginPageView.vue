@@ -1,30 +1,55 @@
 <template>
-	<div>
-		<h1>Login</h1>
-		<form>
-			<div>
-				<label for="username">username</label>
-				<input type="text" id="username">
-
-				<label for="password">password</label>
-				<input type="text" id="password">
-			</div>
-		</form>
-		<br>
-		<v-btn
-  elevation="2"
-	small
-  outlined
->회원가입</v-btn>
-	</div>
+  <div>
+    <h1>Login</h1>
+    <form>
+      <div>
+        <v-text-field
+          label="사용자 이름"
+          placeholder="Username"
+          v-model="username"
+        ></v-text-field>
+		<v-text-field
+        label="비밀번호"
+		type="password"
+        placeholder="Password"
+        v-model="password"
+      ></v-text-field>
+      </div>
+    </form>
+    <br />
+    <v-btn elevation="2" small outlined @click="login">회원가입</v-btn>
+  </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-	name: 'LoginPageView'
+	name: 'LoginPageView',
+	data: function () {
+    return {
+      username: null,
+      password: null
+    }
+  },
+  methods: {
+    login: function () {
+      const username = this.username
+      const password = this.password
+      axios({
+        method: 'post',
+        url : 'http://127.0.0.1:8000/api/token/',
+        data: {username, password}
+      })
+      .then((res) => {
+        localStorage.setItem("jwt", res.data.access)
+        // this.$emit("login")
+        this.$router.push({name: "mainpage"})
+      })
+    }
+  }
 }
+
 </script>
 
 <style>
-
 </style>
