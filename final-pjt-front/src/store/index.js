@@ -6,22 +6,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     movies: null,
+    top10Movie: null,
   },
   getters: {
-    getPopular(state) {
-      const popularSorted = state.movies.sort(function (a, b) {
-        if (b.popularity > a.popularity) {
-          return 1;
-        }
-        if (b.popularity < a.popularity) {
-          return -1;
-        }
-        // a must be equal to b
-        return 0;
-      });
-      popularSorted.splice(10)
-      return popularSorted
-    },
     getRecent(state){
       const recentSorted = state.movies.sort(function(a, b){
         a = new Date(a.release_date);

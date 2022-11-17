@@ -14,25 +14,28 @@
     :key="popularMovie.pk"
     :popularMovie='popularMovie'
     /> -->
-    <p>{{popularMovies}}</p>
+    <p>{{ popularMovies }}</p>
 	</div>
 </template>
 
 <script>
-// import popularMovieItem from '@/components/popularMovieItem';
 export default {
 	name:'popularMovie',
+  props:{
+
+  },
   components:{
-    // popularMovieItem
+   
   },
   computed:{
     popularMovies() {
-      return this.$store.getters.getPopular
+      return this.$store.state.top10Movie
     }
   },
   methods:{
-
-  }
+ 
+  },
+ 
 }
 </script>
 
