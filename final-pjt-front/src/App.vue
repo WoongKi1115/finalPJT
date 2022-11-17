@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="v-app">
     <v-app-bar
       app
       color="primary"
@@ -7,14 +7,19 @@
     >
     <div class="d-flex align-center">
       <!-- 로고 들어갈 자리 -->
+      <router-link :to="{name:'mainpage'}" class="white--text">
+        <img src="" alt="로고자리">
+      </router-link>
       </div>
       
       <v-spacer>
         
       </v-spacer>
-      
-    <router-link :to="{name:'moviepick'}" class="white--text">추천</router-link>
-    <router-link :to="{name:'moviepick'}" class="white--text">Login</router-link>
+    <v-div>
+      <router-link :to="{name:'moviepick'}" class="white--text mx-3">추천</router-link>
+      <router-link :to="{name:'login'}" class="white--text mx-3">Login</router-link>
+      <router-link :to="{name:'signup'}" class="white--text mx-3">회원가입</router-link>
+    </v-div>
   </v-app-bar>
   
   <v-main>
@@ -34,3 +39,9 @@ export default {
   }),
 };
 </script>
+
+<style>
+.v-app {
+  text-align: center;
+}
+</style>
