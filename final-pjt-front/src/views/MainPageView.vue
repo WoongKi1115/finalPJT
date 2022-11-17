@@ -64,6 +64,7 @@ export default {
 				this.movies = res.data
 				this.getGenre()
 				this.$store.state.movies = this.movies
+        // branch test
         // console.log(this.recentMovies)
 				// console.log(this.$store.state.movies)
         // console.log(this.$store.getters.getPopular)
