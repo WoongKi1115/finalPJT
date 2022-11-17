@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<h1>MainPage</h1>
-		<popularMovieitem/>
+		<popularMovie/>
 		<recentMovieitem/>
 		<genreMovieitem/>
 	</div>
@@ -9,13 +9,13 @@
 
 <script>
 
-import popularMovieitem from '@/components/popularMovieitem'
+import popularMovie from '@/components/popularMovie'
 import recentMovieitem from '@/components/recentMovieitem'
 import genreMovieitem from '@/components/genreMovieitem'
 export default {
 	name:'MainPageView',
 	components:{
-		popularMovieitem,
+		popularMovie,
 		recentMovieitem,
 		genreMovieitem
 	},
