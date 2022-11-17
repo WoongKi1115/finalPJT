@@ -8,12 +8,14 @@
           placeholder="Username"
           v-model="username"
         ></v-text-field>
-		<v-text-field
-        label="비밀번호"
-		type="password"
-        placeholder="Password"
-        v-model="password"
-      ></v-text-field>
+        <v-text-field
+          label="비밀번호"
+          :type="show1 ? 'text' : 'password'"
+          :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+          @click:append="show1 = !show1"
+          placeholder="Password"
+          v-model="password"
+        ></v-text-field>
       </div>
     </form>
     <br />
@@ -22,33 +24,32 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
-	name: 'LoginPageView',
-	data: function () {
+  name: "LoginPageView",
+  data: function () {
     return {
       username: null,
-      password: null
-    }
+      password: null,
+      show1: null,
+    };
   },
   methods: {
     login: function () {
-      const username = this.username
-      const password = this.password
+      const username = this.username;
+      const password = this.password;
       axios({
-        method: 'post',
-        url : 'http://127.0.0.1:8000/api/token/',
-        data: {username, password}
-      })
-      .then((res) => {
-        localStorage.setItem("jwt", res.data.access)
+        method: "post",
+        url: "http://127.0.0.1:8000/api/token/",
+        data: { username, password },
+      }).then((res) => {
+        localStorage.setItem("jwt", res.data.access);
         // this.$emit("login")
-        this.$router.push({name: "mainpage"})
-      })
-    }
-  }
-}
-
+        this.$router.push({ name: "mainpage" });
+      });
+    },
+  },
+};
 </script>
 
 <style>
