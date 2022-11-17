@@ -10,6 +10,7 @@
       reverse-transition="fade-transition"
       transition="fade-transition"
     >
+    <div class="titlename">{{popularMovie.title}}</div>
   </v-carousel-item>
   </v-carousel>
 </template>
@@ -39,8 +40,7 @@ export default {
 </script>
 
 <style>
-.modalsize{
-  width: 100%;
-  height: 100%;
+.titlename{
+  color:aliceblue
 }
 </style>

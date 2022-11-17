@@ -10,6 +10,9 @@
 
       <v-spacer> </v-spacer>
       <div>
+        <router-link :to="{ name: 'community' }" class="white--text mx-3"
+          >Community</router-link
+        >
         <router-link :to="{ name: 'moviepick' }" class="white--text mx-3"
           >추천</router-link
         >
