@@ -20,10 +20,33 @@ export default {
 		genreMovieitem
 	},
 	data() {
-		return {
-			allMovies:null,
-		}
-	},
+    return {
+      movies: [],
+      genres: 
+        {
+          28: "액션",
+          12: "모험",
+          16: "애니메이션",
+          35: "코미디",
+          80: "범죄",
+          99: "다큐멘터리",
+          18: "드라마",
+          10751: "가족",
+          14: "판타지",
+          36: "역사",
+          27: "공포",
+          10402: "음악",
+          9648: "미스터리",
+          10749: "로맨스",
+          878: "SF",
+          10770: "TV 영화",
+          53: "스릴러",
+          10752: "전쟁",
+          37: "서부",
+        },
+
+    };
+  },
 	methods:{
 		getMovies() {
 			axios({
@@ -31,13 +54,25 @@ export default {
 				url: 'http://127.0.0.1:8000/api/v1/',
 			})
 			.then((res) => {
-				this.allMovies = res.data
-				this.$store.state.allMovies = res.data
-				console.log(this.$store.state.allMovies)
+				this.movies = res.data
+				this.getGenre()
+				this.$store.state.movies = this.movies
+				console.log(this.$store.state.movies)
 			})
 			.catch((err) => {
 				console.log(err)
 			})
+		},
+		getGenre() {
+      // const movieListLen= movies.length
+      const genresDic = this.genres
+      for (let movie of this.movies) {
+        let newGenre=[]
+        for(let movieGenre of movie.genre_ids){
+          newGenre.push(genresDic[movieGenre])
+        }
+        movie.genre_ids = newGenre
+      }
 		}
 	},
 	created() {
