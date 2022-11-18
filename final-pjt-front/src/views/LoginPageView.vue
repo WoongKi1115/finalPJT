@@ -19,7 +19,7 @@
       </div>
     </form>
     <br />
-    <v-btn elevation="2" small outlined @click="login">회원가입</v-btn>
+    <v-btn elevation="2" small outlined @click="login">로그인</v-btn>
   </div>
 </template>
 
@@ -44,7 +44,7 @@ export default {
         data: { username, password },
       }).then((res) => {
         localStorage.setItem("jwt", res.data.access);
-        // this.$emit("login")
+        this.$emit("login")
         this.$router.push({ name: "mainpage" });
       });
     },
