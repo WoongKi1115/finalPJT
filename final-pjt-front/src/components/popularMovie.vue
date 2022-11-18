@@ -16,29 +16,42 @@
           max-width="auto"
           max-height="auto"
         >
+        <v-dialog
+      v-model="dialog"
+      width="1800"
+    >
+      <template v-slot:activator="{ on, attrs }">
           <div>
-          <v-img  v-on:click.native='openModal' class="d-flex" :src="'https://image.tmdb.org/t/p/original' + popularMovie.backdrop_path" style="object-fit:cover">
+          <v-img   
+          v-bind="attrs"
+          v-on="on" class="d-flex" :src="'https://image.tmdb.org/t/p/original' + popularMovie.backdrop_path" style="object-fit:cover">
           <v-btn class="d-flex align-self-end mt-5" text color="white" >
             <h1>{{popularMovie.title}}</h1>
             </v-btn>
           </v-img>
           </div>
+        </template>
           <!-- 여기부턴 모달 -->
-          <div class='popular-modal'  :class="{hidden:showModal}">
-            <div class='modal_overlay' @click="closeModal"></div>
-            <div class="modal_content">
-              <h1> {{popularMovie.title}} </h1>
-              <v-row class="mt-3">
-                <v-col cols="6">
-                  <span v-for="(genre, index) in popularMovie.genre_ids" :key="index">{{genre}}      </span>
-                  <p>{{popularMovie.overview}}</p>
-                </v-col>
-                <v-col cols="6">
-                  <img :src="'https://image.tmdb.org/t/p/original' + popularMovie.poster_path" alt="" class="modalimg">
-                </v-col>
-              </v-row>
-            </div>
-          </div>
+          <v-card>
+        <!-- <v-card-title class="text-h5 grey lighten-2">
+          {{recentmovie.title}}
+        </v-card-title> -->
+
+        <v-card-text class="pa-5">
+          <v-row>
+            <v-col cols='6'>
+              <v-img :src="'https://image.tmdb.org/t/p/original' + popularMovie.poster_path"></v-img>
+            </v-col>
+            <v-col>
+              <h1>{{popularMovie.title}}</h1>
+              <br>
+              <br>
+              <p>{{popularMovie.overview}}</p>
+            </v-col>
+          </v-row>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
         </v-card>
       </template>
     </v-hover>
@@ -59,7 +72,7 @@ export default {
   data() {
     return {
       isModalviewed:false,
-      showModal:false
+      showModal:true
 
     }
   },
