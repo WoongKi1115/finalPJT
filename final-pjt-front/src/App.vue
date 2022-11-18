@@ -110,7 +110,6 @@ export default {
           this.getRecent();
           this.$store.state.recenteMovie = this.recenteMovies
           this.classifyGenre()
-          console.log(this.$store.state.classifiedMovie)
          
         })
         .catch((err) => {
