@@ -27,6 +27,7 @@
     >
       <template v-slot:activator="{ on, attrs }">
         <v-img
+          
           v-bind="attrs"
           v-on="on"
           :src="'https://image.tmdb.org/t/p/original' + recentmovie.poster_path"
@@ -34,17 +35,15 @@
         </v-img>
       </template>
 
-      <v-card>
-        <!-- <v-card-title class="text-h5 grey lighten-2">
-          {{recentmovie.title}}
-        </v-card-title> -->
+      <v-card >
+        
 
         <v-card-text class="pa-5">
           <v-row>
-            <v-col cols='6'>
-              <v-img :src="'https://image.tmdb.org/t/p/original' + recentmovie.poster_path"></v-img>
+            <v-col cols='5'>
+              <v-img class="modalimage" :src="'https://image.tmdb.org/t/p/original' + recentmovie.poster_path"></v-img>
             </v-col>
-            <v-col>
+            <v-col cols='7'>
               <h1>{{recentmovie.title}}</h1>
               <br>
               <br>
@@ -81,4 +80,5 @@ export default {
 </script>
 
 <style>
+
 </style>

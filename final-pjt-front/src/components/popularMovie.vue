@@ -2,7 +2,9 @@
 	<div>
 		<h1>PopularMovie</h1>
   <v-row class="d-flex justify-center">
-  <v-carousel height="1000" class="popular-movie-carousel" col=10 style="z-index: 0">
+    <v-col cols='10'>
+  <v-carousel height="auto" class="popular-movie-carousel" col=10 style="z-index: 0"
+  >
     <v-carousel-item style="z-index:1"
       v-for="popularMovie in popularMovies"
       :key="popularMovie.id"
@@ -13,7 +15,7 @@
       <template>
         <v-card
           class="mx-auto"
-          max-width="auto"
+          max-width="2200"
           max-height="auto"
         >
         <v-dialog
@@ -32,17 +34,13 @@
           </div>
         </template>
           <!-- 여기부턴 모달 -->
-          <v-card>
-        <!-- <v-card-title class="text-h5 grey lighten-2">
-          {{recentmovie.title}}
-        </v-card-title> -->
-
-        <v-card-text class="pa-5">
+          <v-card style="{background:'https://image.tmdb.org/t/p/original' + popularMovie.backdrop_path}">
+        <v-card-text class="pa-5" >
           <v-row>
-            <v-col cols='6'>
-              <v-img :src="'https://image.tmdb.org/t/p/original' + popularMovie.poster_path"></v-img>
+            <v-col cols='5'>
+              <v-img class="modalimage" :src="'https://image.tmdb.org/t/p/original' + popularMovie.poster_path"></v-img>
             </v-col>
-            <v-col>
+            <v-col cols='7'>
               <h1>{{popularMovie.title}}</h1>
               <br>
               <br>
@@ -58,6 +56,7 @@
     
   </v-carousel-item>
   </v-carousel>
+  </v-col>
 </v-row>
 
     <!-- <p>{{ popularMovies }}</p> -->
@@ -139,6 +138,12 @@ export default {
 }
 .modalimg{
   width: 500px;
+  
+}
+.modalimage{
+  width:600px;
+  height:800px;
+  border-radius: 10px;
   
 }
 
