@@ -22,7 +22,7 @@
         >
         <div class="text-center">
     <v-dialog
-      v-model="dialog"
+
       width="1800"
     >
       <template v-slot:activator="{ on, attrs }">
