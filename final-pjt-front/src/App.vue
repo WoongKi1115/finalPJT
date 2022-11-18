@@ -37,6 +37,8 @@
 
 <script>
 import axios from "axios";
+import _ from "lodash"
+
 export default {
   name: "App",
 
@@ -45,6 +47,7 @@ export default {
       isLoggedIn: false,
       movies: [],
       popularMovies: null,
+      recenteMovies: null,
       genres: {
         28: "액션",
         12: "모험",
@@ -80,11 +83,9 @@ export default {
           this.$store.state.movies = this.movies;
           this.getPopular();
           this.$store.state.top10Movie = this.popularMovies;
-          // console.log(this.movies)
-          // branch test
-          // console.log(this.recentMovies)
-          // console.log(this.$store.state.movies)
-          // console.log(this.$store.getters.getPopular)
+          this.getRecent();
+          this.$store.state.recenteMovie = this.recenteMovies
+          
         })
         .catch((err) => {
           console.log(err);
@@ -102,7 +103,8 @@ export default {
       }
     },
     getPopular() {
-      const popularSorted = this.$store.state.movies.sort(function (a, b) {
+      this.popularMovies = _.cloneDeep(this.$store.state.movies)
+      const popularSorted = this.popularMovies.sort(function (a, b) {
         if (b.popularity > a.popularity) {
           return 1;
         }
@@ -114,6 +116,18 @@ export default {
       popularSorted.splice(10);
       this.popularMovies = popularSorted;
     },
+    getRecent(){
+      this.recenteMovies = _.cloneDeep(this.$store.state.movies)
+      const recentSorted = this.recenteMovies.sort(function(a, b){
+        a = new Date(a.release_date);
+        b = new Date(b.release_date);
+        return a>b ? -1 : a<b ? 1 : 0;
+      })
+      recentSorted.splice(20)
+      this.recenteMovies = recentSorted
+    },
+
+    // 로그인쪽
     isLogin() {
       if (window.localStorage.getItem("jwt")) {
         this.isLoggedIn = true;
