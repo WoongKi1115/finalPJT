@@ -69,6 +69,29 @@ export default {
         10752: "전쟁",
         37: "서부",
       },
+      calssifiedGenres:{
+        28: [],
+        12: [],
+        16: [],
+        35: [],
+        80: [],
+        99: [],
+        18: [],
+        10751: [],
+        14: [],
+        36: [],
+        27: [],
+        10402: [],
+        9648: [],
+        10749: [],
+        878: [],
+        10770: [],
+        53: [],
+        10752: [],
+        37: [],
+
+
+      }
     };
   },
   methods: {
@@ -79,13 +102,16 @@ export default {
       })
         .then((res) => {
           this.movies = res.data;
+          this.$store.state.unprocessedMovies = _.cloneDeep(this.movies)
           this.getGenre();
           this.$store.state.movies = this.movies;
           this.getPopular();
           this.$store.state.top10Movie = this.popularMovies;
           this.getRecent();
           this.$store.state.recenteMovie = this.recenteMovies
-          
+          this.classifyGenre()
+          console.log(this.$store.state.classifiedMovie)
+         
         })
         .catch((err) => {
           console.log(err);
@@ -125,6 +151,16 @@ export default {
       })
       recentSorted.splice(20)
       this.recenteMovies = recentSorted
+    },
+    classifyGenre(){
+      const unprocessed =  _.cloneDeep(this.$store.state.unprocessedMovies)
+      // console.log(unprocessed)
+      for (let movie of unprocessed) {
+        for (let genre of movie.genre_ids){
+          this.calssifiedGenres[genre].push(movie)
+        }
+      }
+      this.$store.state.classifiedMovie = this.calssifiedGenres
     },
 
     // 로그인쪽

@@ -40,7 +40,7 @@
               "
               rounded
             >
-              우한
+              우울한
             </v-btn>
             <v-btn
               @click="clicked.clicked2 = !clicked.clicked2"
@@ -131,6 +131,7 @@
 
 <script>
 import moviePickitem from "@/components/moviePickitem";
+import _ from "lodash"
 export default {
   name: "MoviePickView",
   methods: {
@@ -163,16 +164,32 @@ export default {
           }
         }
       }
-      console.log(this.pickedMoods);
-      for (let pickedMood of this.pickedMoods){
-        this.moodsCount[pickedMood] +=1
+      for (let pickedMood of this.pickedMoods) {
+        this.moodsCount[pickedMood] += 1;
       }
-      console.log(this.moodsCount)
+      // console.log(this.moodsCount)
+      for (let id in this.moodsCount) {
+        let count = this.moodsCount[id];
+        if (count) {
+          console.log(count)
+          const recommendedMovie =  _.cloneDeep(this.classifyMovie[id])
+          recommendedMovie.splice(count)
+          for (let movie of recommendedMovie){
+            this.recommendMovie.push(movie)
+          }
+        }
+      }
       this.dialog = false;
+      console.log(this.recommendMovie);
     },
   },
   components: {
     moviePickitem,
+  },
+  computed: {
+    classifyMovie() {
+      return this.$store.state.classifiedMovie;
+    },
   },
   data() {
     return {
@@ -189,15 +206,16 @@ export default {
         clicked8: false,
       },
       moods: {
-        bad: ["clicked1", "clicked2", "clicked3", "clicked4"],
-        good: ["clicked5", "clicked6", "clicked7", "clicked8"],
+        35: ["clicked1", "clicked2", "clicked3", "clicked4"],
+        28: ["clicked5", "clicked6", "clicked7", "clicked8"],
       },
       moodsCount: {
-        bad: 0,
-        good: 0,
+        35: 0,
+        28: 0,
       },
       clickedList: [],
       pickedMoods: [],
+      recommendMovie: [],
     };
   },
 };
