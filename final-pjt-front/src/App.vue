@@ -16,9 +16,13 @@
         <router-link :to="{ name: 'moviepick' }" class="white--text mx-3"
           >추천</router-link
         >
-        <router-link :to="{ name: 'login' }" class="white--text mx-3"
+        <router-link
+          :to="{ name: 'login' }"
+          class="white--text mx-3"
+          v-show="!this.isLoggedIn"
           >Login</router-link
         >
+        <button v-show="this.isLoggedIn" @click="logOut">Loggout</button>
         <router-link :to="{ name: 'signup' }" class="white--text mx-3"
           >회원가입</router-link
         >
@@ -26,7 +30,7 @@
     </v-app-bar>
 
     <v-main>
-      <router-view />
+      <router-view @login="isLoggedIn = true" />
     </v-main>
   </v-app>
 </template>
@@ -38,6 +42,7 @@ export default {
 
   data() {
     return {
+      isLoggedIn: false,
       movies: [],
       popularMovies: null,
       genres: {
@@ -73,8 +78,8 @@ export default {
           this.movies = res.data;
           this.getGenre();
           this.$store.state.movies = this.movies;
-          this.getPopular()
-          this.$store.state.top10Movie= this.popularMovies
+          this.getPopular();
+          this.$store.state.top10Movie = this.popularMovies;
           // console.log(this.movies)
           // branch test
           // console.log(this.recentMovies)
@@ -107,13 +112,25 @@ export default {
         return 0;
       });
       popularSorted.splice(10);
-      this.popularMovies = popularSorted
-      
+      this.popularMovies = popularSorted;
+    },
+    isLogin() {
+      if (window.localStorage.getItem("jwt")) {
+        this.isLoggedIn = true;
+      } else {
+        this.isLoggedIn = false;
+      }
+    },
+    logOut() {
+      window.localStorage.removeItem("jwt");
+      this.$router.push({ name: "mainpage" });
+      this.isLoggedIn = false;
     },
   },
 
   created() {
     this.getMovies();
+    this.isLogin();
   },
 };
 </script>
