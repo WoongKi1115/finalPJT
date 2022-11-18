@@ -40,6 +40,7 @@
 
         <v-text-field
           label="이메일"
+          placeholder="email"
           v-model="credentials.email"
           type="email"
           filled

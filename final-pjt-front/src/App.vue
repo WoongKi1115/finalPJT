@@ -123,7 +123,7 @@ export default {
     },
     logOut() {
       window.localStorage.removeItem("jwt");
-      this.$router.push({ name: "mainpage" });
+      this.$router.push({ name: "login" });
       this.isLoggedIn = false;
     },
   },

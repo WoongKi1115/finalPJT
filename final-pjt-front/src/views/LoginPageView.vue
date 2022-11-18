@@ -1,12 +1,15 @@
 <template>
   <div>
     <h1>Login</h1>
-    <form>
-      <div>
+    <v-row justify="center" align="center">
+      <v-col cols="12" sm="5" md="5">
         <v-text-field
           label="사용자 이름"
           placeholder="Username"
           v-model="username"
+          filled
+          rounded
+          dense
         ></v-text-field>
         <v-text-field
           label="비밀번호"
@@ -15,9 +18,13 @@
           @click:append="show1 = !show1"
           placeholder="Password"
           v-model="password"
+          filled
+          rounded
+          dense
+          @keyup.enter="login"
         ></v-text-field>
-      </div>
-    </form>
+      </v-col>
+    </v-row>
     <br />
     <v-btn elevation="2" small outlined @click="login">로그인</v-btn>
   </div>
@@ -44,9 +51,10 @@ export default {
         data: { username, password },
       }).then((res) => {
         localStorage.setItem("jwt", res.data.access);
-        this.$emit("login")
+        this.$emit("login");
         this.$router.push({ name: "mainpage" });
-      });
+      })
+        .catch(() => alert('틀렸어!'))
     },
   },
 };
