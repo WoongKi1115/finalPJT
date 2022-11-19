@@ -6,8 +6,8 @@
     max-width="1800"
   >
     <v-slide-group
-      v-model="model"
-      class="pa-4"
+      
+      class="pa-4 recentmovie my-slider"
       active-class="success"
       show-arrows
     >
@@ -80,5 +80,12 @@ export default {
 </script>
 
 <style>
+.recentmovie{
+  background-color: black;
+}
+.my-slider > .v-slide-group__next.theme
+{
+    color: rgb(234, 10, 10)!important;
 
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <v-app class="v-app">
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app color="#E50914" >
       <div class="d-flex align-center">
         <!-- 로고 들어갈 자리 -->
         <router-link :to="{ name: 'mainpage' }" class="white--text">
@@ -10,20 +10,21 @@
 
       <v-spacer> </v-spacer>
       <div>
-        <router-link :to="{ name: 'community' }" class="white--text mx-3"
+        <router-link style="text-decoration:none"  :to="{ name: 'community' }" class="white--text mx-3"
           >Community</router-link
         >
-        <router-link :to="{ name: 'moviepick' }" class="white--text mx-3"
+        <router-link style="text-decoration:none" :to="{ name: 'moviepick' }" class="white--text mx-3"
           >추천</router-link
         >
         <router-link
+        style="text-decoration:none"
           :to="{ name: 'login' }"
           class="white--text mx-3"
           v-show="!this.isLoggedIn"
           >Login</router-link
         >
-        <button v-show="this.isLoggedIn" @click="logOut">Loggout</button>
-        <router-link :to="{ name: 'signup' }" class="white--text mx-3"
+        <button v-show="this.isLoggedIn" @click="logOut" style="text-decoration:none">Loggout</button>
+        <router-link style="text-decoration:none" :to="{ name: 'signup' }" class="white--text mx-3"
           >회원가입</router-link
         >
       </div>
@@ -187,5 +188,6 @@ export default {
 <style>
 .v-app {
   text-align: center;
+  
 }
 </style>

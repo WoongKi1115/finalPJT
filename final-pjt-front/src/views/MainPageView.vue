@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <h1>MainPage</h1>
-    <popularMovie />
+  <div class="mainpage">
+    <popularMovie/>
+    <br>
     <recentMovieitem />
     <genreMovieitem />
   </div>
@@ -30,4 +30,8 @@ export default {
 </script>
 
 <style>
+.mainpage{
+  background-color: #000000;
+  color: white;
+  }
 </style>
