@@ -1,56 +1,56 @@
 <template>
-  <div>
-    <h1>Signup</h1>
-    <v-row justify="center" align="center">
-      <v-col cols="12" sm="5" md="5" >
-        <v-text-field
-          label="사용자 이름"
-          placeholder="Username"
-          v-model="credentials.username"
-          filled
-          rounded
-          dense
-        ></v-text-field>
+    <div class="signuppage">
+      <h1>Signup</h1>
+      <v-row justify="center" align="center">
+        <v-col cols="12" sm="5" md="5" >
+          <v-text-field
+            label="사용자 이름"
+            placeholder="Username"
+            v-model="credentials.username"
+            filled
+            rounded
+            dense
+          ></v-text-field>
 
-        <v-text-field
-          label="비밀번호"
-          :type="show1 ? 'text' : 'password'"
-          placeholder="Password"
-          v-model="credentials.password"
-          :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-          @click:append="show1 = !show1"
-          filled
-          rounded
-          dense
-        ></v-text-field>
+          <v-text-field
+            label="비밀번호"
+            :type="show1 ? 'text' : 'password'"
+            placeholder="Password"
+            v-model="credentials.password"
+            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append="show1 = !show1"
+            filled
+            rounded
+            dense
+          ></v-text-field>
 
-        <v-text-field
-          label="비밀번호 확인"
-          :type="show2 ? 'text' : 'password'"
-          placeholder="Passwordconfirm"
-          v-model="credentials.passwordConfirm"
-          :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-          @click:append="show2 = !show2"
-          @keyup.enter="signup"
-          :rules="[matchingPasswords]"
-          filled
-          rounded
-          dense
-        ></v-text-field>
+          <v-text-field
+            label="비밀번호 확인"
+            :type="show2 ? 'text' : 'password'"
+            placeholder="Passwordconfirm"
+            v-model="credentials.passwordConfirm"
+            :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append="show2 = !show2"
+            @keyup.enter="signup"
+            :rules="[matchingPasswords]"
+            filled
+            rounded
+            dense
+          ></v-text-field>
 
-        <v-text-field
-          label="이메일"
-          placeholder="email"
-          v-model="credentials.email"
-          type="email"
-          filled
-          rounded
-          dense
-        ></v-text-field>
-      </v-col>
-    </v-row>
-    <button @click="signup">회원가입</button>
-  </div>
+          <v-text-field
+            label="이메일"
+            placeholder="email"
+            v-model="credentials.email"
+            type="email"
+            filled
+            rounded
+            dense
+          ></v-text-field>
+        </v-col>
+      </v-row>
+      <button @click="signup">회원가입</button>
+    </div>
 </template>
   
   <script>
@@ -95,4 +95,10 @@ export default {
   },
 };
 </script>
+<style>
+.signuppage{
+  background-color: azure;
+  color: black;
+}
+</style>
   

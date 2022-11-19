@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="loginpage">
     <h1>Login</h1>
     <v-row justify="center" align="center">
       <v-col cols="12" sm="5" md="5">
@@ -61,4 +61,8 @@ export default {
 </script>
 
 <style>
+.loginpage{
+  background-color: azure;
+  color: black;
+}
 </style>

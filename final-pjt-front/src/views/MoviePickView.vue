@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="recommendpage">
     <h1>영화 추천해주는 페이지</h1>
     <h3>설명란</h3>
     <v-row justify="center" class="mt-5">
@@ -328,13 +328,14 @@
     <br />
     <br />
     <v-sheet class="mx-auto" max-width="1800">
-      <v-slide-group class="pa-4" active-class="success" show-arrows>
+      <v-slide-group class="pa-4 recommendmovie" active-class="success" show-arrows dark>
         <v-slide-item v-for="(rcdMovie, index) in recommendMovie" :key="index">
           <v-card class="ma-4 pa-1" height="450" width="300">
             <div class="text-center">
               <v-dialog width="1800">
                 <template v-slot:activator="{ on, attrs }">
                   <v-img
+                    height="440"
                     v-bind="attrs"
                     v-on="on"
                     :src="
@@ -346,9 +347,9 @@
                 </template>
 
                 <v-card>
-                  <v-card-text class="pa-5">
+                  <v-card-text class="pa-7 modalstyle">
                     <v-row>
-                      <v-col cols="5">
+                      <v-col cols="5" class="pa-0">
                         <v-img
                           class="modalimage"
                           :src="
@@ -357,11 +358,22 @@
                           "
                         ></v-img>
                       </v-col>
-                      <v-col cols="7">
-                        <h1>{{ rcdMovie.title }}</h1>
-                        <br />
-                        <br />
-                        <p>{{ rcdMovie.overview }}</p>
+                      <v-col cols="7"  class="pa-0" style="color:#EEEEEE">
+                        <h1>{{rcdMovie.title}}</h1>
+              <br>
+              <br>
+              <div class="d-flex justify-space-around">
+                <div>
+                  <label for="genre">장르 : </label>
+                  <span id="genre" v-for="(genre, index) in rcdMovie.genre_ids" :key="index"> {{genre}}&nbsp;&nbsp;&nbsp; </span>
+                </div>
+              <span>평점 : {{rcdMovie.vote_average}}</span>
+              <span>개봉일 : {{rcdMovie.release_date}}</span>
+              </div>
+              <br>
+              <br>
+              <label for="overview">줄거리 : </label>
+              <span id="overview">{{rcdMovie.overview}}</span>
                       </v-col>
                     </v-row>
                   </v-card-text>
@@ -501,4 +513,11 @@ export default {
 </script>
 
 <style>
+.recommendpage{
+  background-color: #000000;
+  color: white;
+  }
+  .recommendmovie{
+  background-color: black;
+}
 </style>
