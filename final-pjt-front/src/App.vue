@@ -30,7 +30,7 @@
       </div>
     </v-app-bar>
 
-    <v-main>
+    <v-main class="v-mains">
       <router-view @login="isLoggedIn = true" />
     </v-main>
   </v-app>
@@ -189,5 +189,10 @@ export default {
 .v-app {
   text-align: center;
   
+}
+.v-main {
+  background-color: #000000;
+  color: white;
+
 }
 </style>

@@ -3,7 +3,7 @@
 		<h1>PopularMovie</h1>
   <v-row class="d-flex justify-center">
     <v-col cols='10'>
-  <v-carousel height="700" class="popular-movie-carousel" col=10 style="z-index: 0"
+  <v-carousel cycle height="700" class="popular-movie-carousel" col=10 style="z-index: 0"
   >
     <v-carousel-item style="z-index:1"
       v-for="popularMovie in popularMovies"
@@ -34,16 +34,27 @@
         </template>
           <!-- 여기부턴 모달 -->
           <v-card style="{background:'https://image.tmdb.org/t/p/original' + popularMovie.backdrop_path}">
-        <v-card-text class="pa-5" >
+        <v-card-text class="pa-7 modalstyle" >
           <v-row>
-            <v-col cols='5'>
-              <v-img class="modalimage" :src="'https://image.tmdb.org/t/p/original' + popularMovie.poster_path"></v-img>
+            <v-col cols='5' class="pa-0">
+              <img class="modalimage" :src="'https://image.tmdb.org/t/p/original' + popularMovie.poster_path">
             </v-col>
-            <v-col cols='7'>
+            <v-col cols='7' style="color:#EEEEEE" class="pa-0">
               <h1>{{popularMovie.title}}</h1>
               <br>
               <br>
-              <p>{{popularMovie.overview}}</p>
+              <div class="d-flex justify-space-around">
+                <div>
+                  <label for="genre">장르 : </label>
+                  <span id="genre" v-for="(genre, index) in popularMovie.genre_ids" :key="index"> {{genre}}&nbsp;&nbsp;&nbsp; </span>
+                </div>
+              <span>평점 : {{popularMovie.vote_average}}</span>
+              <span>개봉일 : {{popularMovie.release_date}}</span>
+              </div>
+              <br>
+              <br>
+              <label for="overview">줄거리 : </label>
+              <span id="overview">{{popularMovie.overview}}</span>
             </v-col>
           </v-row>
         </v-card-text>
@@ -97,54 +108,24 @@ export default {
 </script>
 
 <style>
-.btnsize{
-  font-size: 3rem;
-}
+
 .popular-movie-carousel{
   height: 1000px;
   width: 1777px;
   ;
-}
-.popular-modal{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-}
-.modal_overlay{
-  background-color: rgba(0, 0, 0, 0.6);
-  width: 100%;
-  height: 100%;
-  position: absolute;
-}
-.modal_content{
-  background-color: white;
-  padding: 50px;
-  text-align: center;
-  position: relative;
-  width: 90%;
-  top: 0px;
-  border-radius: 10px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0, 6px 6px rgba(0, 0, 0, 0.23);
-  z-index: 2;
-}
-.hidden{
-  display:none
-}
+} 
+
 .modalimg{
   width: 500px;
   
+  
 }
 .modalimage{
-  width:600px;
-  height:800px;
+  width: 600px;
+  height: 840px;
   border-radius: 10px;
-  
+  object-fit: fit;
+  display: block;
 }
 
 </style>
