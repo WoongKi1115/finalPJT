@@ -1,4 +1,7 @@
 <template>
+  <v-row>
+    <v-col cols="3"></v-col>
+    <v-col cols="6">
   <div class="loginpage">
     <h1>Login</h1>
     <v-row justify="center" align="center">
@@ -28,6 +31,9 @@
     <br />
     <v-btn elevation="2" small outlined @click="login">로그인</v-btn>
   </div>
+  </v-col>
+  <v-col cols="3"></v-col>
+  </v-row>
 </template>
 
 <script>
@@ -62,6 +68,9 @@ export default {
 
 <style>
 .loginpage{
+  margin-top: 90px;
+  border-radius: 20px;
+  padding: 30px;
   background-color: azure;
   color: black;
 }
