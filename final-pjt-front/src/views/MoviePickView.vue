@@ -22,7 +22,7 @@
           </v-btn>
         </template>
         <v-card>
-          <v-toolbar dark color="deep-purple darken-1" class="mb-5">
+          <v-toolbar dark color="E50914" class="mb-5">
             <v-btn icon dark @click="dialog = false">
               <v-icon>mdi-close</v-icon>
             </v-btn>
@@ -32,7 +32,7 @@
               <v-btn dark text @click="[save()]"> 추천받기 </v-btn>
             </v-toolbar-items>
           </v-toolbar>
-          <v-list-item>
+          <v-list-item >
             <v-row class="d-flex justify-space-around mb-4">
               <v-col>
                 <v-btn
@@ -443,8 +443,20 @@ export default {
           }
         }
       }
+      this.getGenre()
       this.dialog = false;
       console.log(this.recommendMovie);
+    },
+    getGenre() {
+      // const movieListLen= movies.length
+      const genresDic = this.genres;
+      for (let movie of this.recommendMovie) {
+        let newGenre = [];
+        for (let movieGenre of movie.genre_ids) {
+          newGenre.push(genresDic[movieGenre]);
+        }
+        movie.genre_ids = newGenre;
+      }
     },
   },
   components: {
@@ -502,6 +514,27 @@ export default {
         14: 0,
         10749: 0,
         53: 0,
+      },
+      genres: {
+        28: "액션",
+        12: "모험",
+        16: "애니메이션",
+        35: "코미디",
+        80: "범죄",
+        99: "다큐멘터리",
+        18: "드라마",
+        10751: "가족",
+        14: "판타지",
+        36: "역사",
+        27: "공포",
+        10402: "음악",
+        9648: "미스터리",
+        10749: "로맨스",
+        878: "SF",
+        10770: "TV 영화",
+        53: "스릴러",
+        10752: "전쟁",
+        37: "서부",
       },
       clickedList: [],
       pickedMoods: [],
