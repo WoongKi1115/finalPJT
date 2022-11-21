@@ -115,6 +115,7 @@ export default {
           this.getRecent();
           this.$store.state.recenteMovie = this.recenteMovies
           this.classifyGenre()
+          this.getArticle();
          
         })
         .catch((err) => {
@@ -197,7 +198,7 @@ export default {
   created() {
     this.getMovies();
     this.isLogin();
-    this.getArticle();
+    
   },
 };
 </script>
