@@ -5,6 +5,7 @@ import MoviePickView from '@/views/MoviePickView'
 import LoginPageView from '@/views/LoginPageView'
 import SignupPageView from '@/views/SignupPageView'
 import CommunityView from '@/views/CommunityView'
+import createArticle from '@/views/createArticle'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/community',
     name: 'community',
     component: CommunityView
+  },
+  {
+    path: '/create',
+    name: 'createArticle',
+    component: createArticle
   },
 ]
 

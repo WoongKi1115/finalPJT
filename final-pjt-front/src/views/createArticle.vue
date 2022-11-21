@@ -3,14 +3,13 @@
       <input 
         type="text" 
         v-model.trim="title" 
-        @keyup.enter="createTodo"
       >
       <input 
         type="text" 
-        v-model.trim="title" 
-        @keyup.enter="createTodo"
+        v-model.trim="content" 
+        @keyup.enter="createArticle"
       >
-      <button @click="createTodo">+</button>
+      <button @click="createArticle">+</button>
     </div>
   </template>
   
@@ -20,23 +19,25 @@
   const API_URL = 'http://127.0.0.1:8000'
   
   export default {
-    name: 'CreateTodo',
+    name: 'createArticle',
     data: function () {
       return {
         title: null,
+        content:null,
       }
     },
     methods: {
-      createTodo() {
+      createArticle() {
         const title = this.title
+        const content = this.content
         if (!title) {
           alert('입력을해!!!!')
           return
         }
         axios({
           method: 'post',
-          url: `${API_URL}/todos/`,
-          data: { title },
+          url: `${API_URL}/community/`,
+          data: { title, content },
           headers:{
             Authorization: `Bearer ${window.localStorage.getItem('jwt')}`
           }
@@ -44,7 +45,7 @@
         
         })
         .then(() => {
-          this.$router.push({ name: 'TodoList' })
+          console.log('성공')
         })
       }
     }
