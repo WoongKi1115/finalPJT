@@ -20,36 +20,25 @@ export default {
     };
   },
   computed: {
-    articles() {
-      return this.$store.state.articles;
-    },
   },
   methods: {
-    getArticleId(pickid) {
+    getArticle(articleId) {
       axios({
         method: "get",
-        url: `${API_URL}/community/`,
+        url: `${API_URL}/community/${articleId}`,
       })
-        .then((res) => {
-          this.$store.state.articles = res.data;
-          for (let articleId in this.articles) {
-            if (this.articles[articleId].id === pickid) {
-              this.article = this.articles[articleId];
-              // console.log("성공");
-              break;
-              // }
-            }
-          }
-        })
+      .then((res) =>{
+        this.article = res.data
+      })
         .catch((err) => {
           console.log(err);
         });
     },
-    },
+
+  },
 
   created() {
-    
-    this.getArticleId(this.$route.params.id);
+    this.getArticle(this.$route.params.id);
   },
 };
 </script>
