@@ -90,9 +90,6 @@ export default {
 
 <style>
 .comment {
-
-
-  
 }
 .detailpage{
   width: 80%;
