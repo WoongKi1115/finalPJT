@@ -3,7 +3,7 @@
 		<h1>PopularMovie</h1>
   <v-row class="d-flex justify-center">
     <v-col cols='10'>
-  <v-carousel cycle height="700" class="popular-movie-carousel" col=10 style="z-index: 0"
+  <v-carousel cycle hide-delimiter-background height="700" class="popular-movie-carousel" col=10 style="z-index: 0"
   >
     <v-carousel-item style="z-index:1"
       v-for="popularMovie in popularMovies"
