@@ -1,27 +1,34 @@
 <template>
-  <div>
+  <div class="communitypage">
     <h1>Community</h1>
     <v-btn @click="moveCreate">create</v-btn>
-    <v-row>
+    <v-row class="ma-5">
       <v-col cols="1"></v-col>
-      <v-col cols="10">
+      <v-col cols="10" class="pa-0" style="border-radius:10px;">
         <div
           style="background-color: white; color: black"
           class="text-center d-flex align-items-center"
         >
           <v-row>
             <v-col
+              class="pe-0"
               cols="1"
               style="
                 border-right: 1px solid black;
-                border-bottom: 1px solid black;
               "
             >
               ID
             </v-col>
-            <v-col cols="8"> TITLE </v-col>
-            <v-col cols="2"> 작성시간 </v-col>
-            <v-col cols="1"> 추천 수 </v-col>
+            <v-col style="
+                border-right: 1px solid black;
+              " cols="6"> TITLE </v-col>
+            <v-col style="
+                border-right: 1px solid black;
+              " cols="2"> 작성시간 </v-col>
+            <v-col style="
+                border-right: 1px solid black;
+              " cols="2"> 작성자 </v-col>
+            <v-col cols="1"> 댓글 수 </v-col>
           </v-row>
         </div>
         <communityItem
@@ -77,4 +84,7 @@ export default {
 </script>
 
 <style>
+.communitypage{
+  font-size: 24px;
+}
 </style>
