@@ -1,16 +1,30 @@
 <template>
+  <v-row>
+    <v-col cols="2"></v-col>
+    <v-col cols="8" class="createArticle">
+      <h1 style="color:black">Create</h1>
     <div>
-      <input 
-        type="text" 
-        v-model.trim="title" 
-      >
-      <input 
-        type="text" 
-        v-model.trim="content" 
-        @keyup.enter="createArticle"
-      >
-      <button @click="createArticle">+</button>
+      <form>
+    <v-text-field
+      v-model="title"
+      label="Title"
+    ></v-text-field>
+    <v-textarea
+          solo
+          v-model="content"
+          label="content"
+        ></v-textarea>
+    <v-btn
+      class="mr-4"
+      @click="createArticle"
+    >
+      submit
+    </v-btn>
+  </form>
     </div>
+  </v-col>
+    <v-col cols="2"></v-col>
+  </v-row>
   </template>
   
   <script>
@@ -52,4 +66,12 @@
     }
   }
   </script>
-  
+  <style>
+    .createArticle{
+      margin-top: 90px;
+      border-radius: 20px;
+      padding: 30px;
+      background-color: azure;
+      color: black;
+    }
+  </style>

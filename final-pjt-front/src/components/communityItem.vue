@@ -1,6 +1,7 @@
 <template>
 	<div style="color:white">
-		<p>{{article.title}}</p>
+		<span>{{article.title}}</span>
+		<span>{{article.username}}</span>
 	</div>
 </template>
 
