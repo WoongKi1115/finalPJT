@@ -11,7 +11,7 @@
         >
           <v-row>
             <v-col
-              class="pe-0"
+              class="pe-0 d-flex align-self-center justify-center"
               cols="1"
               style="
                 border-right: 1px solid black;
@@ -21,14 +21,14 @@
             </v-col>
             <v-col style="
                 border-right: 1px solid black;
-              " cols="6"> TITLE </v-col>
+              " cols="6" class="d-flex align-self-center justify-center"> TITLE </v-col>
             <v-col style="
                 border-right: 1px solid black;
-              " cols="2"> 작성시간 </v-col>
+              " cols="2" class="d-flex align-self-center justify-center"> 작성시간 </v-col>
             <v-col style="
                 border-right: 1px solid black;
-              " cols="2"> 작성자 </v-col>
-            <v-col cols="1"> 댓글 수 </v-col>
+              " cols="2" class="d-flex align-self-center justify-center"> 작성자 </v-col>
+            <v-col cols="1" class="ps-0"> 댓글 수 </v-col>
           </v-row>
         </div>
         <communityItem
