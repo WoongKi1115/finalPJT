@@ -7,6 +7,7 @@ import SignupPageView from '@/views/SignupPageView'
 import CommunityView from '@/views/CommunityView'
 import createArticle from '@/views/createArticle'
 import MyPageView from '@/views/MyPageView'
+import CommunityDetailView from '@/views/CommunityDetailView'
 
 Vue.use(VueRouter)
 
@@ -45,7 +46,12 @@ const routes = [
     path: '/mypage',
     name: 'mypage',
     component: MyPageView
-  }
+  },
+  {
+    path: '/:id',
+    name: 'communityDetail',
+    component: CommunityDetailView
+  },
 ]
 
 const router = new VueRouter({

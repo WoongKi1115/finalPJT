@@ -9,7 +9,7 @@ class ArticleListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         # fields = ('id', 'title', 'content')
-        fields = ('id', 'title', 'content', 'user', 'username')
+        fields = ('id', 'title', 'content', 'user', 'username', 'created_at', 'updated_at')
 
 class CommentSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='user.username', read_only=True)
