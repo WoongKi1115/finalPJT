@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import axios from "axios";
+const API_URL = "http://127.0.0.1:8000";
 import communityItem from "@/components/communityItem";
 export default {
   name: "CommunityView",
@@ -50,6 +52,18 @@ export default {
     communityItem,
   },
   methods: {
+    getArticle() {
+      axios({
+        method: "get",
+        url: `${API_URL}/community/`,
+      })
+        .then((res) => {
+          this.$store.state.articles = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     moveCreate() {
       if (!this.isLoggedIn) {
         alert("로그인 해주세요");
@@ -68,6 +82,7 @@ export default {
   },
   created() {
     this.isLogin();
+    this.getArticle();
   },
 };
 </script>
