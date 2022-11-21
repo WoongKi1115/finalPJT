@@ -46,6 +46,7 @@
         })
         .then(() => {
           console.log('성공')
+          this.$router.push('community')
         })
       }
     }
