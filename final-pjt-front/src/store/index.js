@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    
+    articles:null,
     unprocessedMovies:null,
     movies: null,
     top10Movie: null,
