@@ -26,27 +26,21 @@
             <v-btn icon dark @click="dialog = false">
               <v-icon>mdi-close</v-icon>
             </v-btn>
-            <v-toolbar-title>오늘어때?</v-toolbar-title>
+            <v-toolbar-title>5가지 상태를 고르고 추천받기 버튼을 눌러주세요!</v-toolbar-title>
+            <v-spacer></v-spacer>
             <v-toolbar-items>
-              <v-btn dark text @click="[save()]"> 추천받기 </v-btn>
+              <v-btn dark text @click="[save()]" class="my-font2"> 추천받기 </v-btn>
             </v-toolbar-items>
           </v-toolbar>
-          <v-list-item >
+          <v-list-item>
             <v-row class="d-flex justify-space-around mb-4">
               <v-col>
                 <v-btn
                   @click="clicked.clicked1 = !clicked.clicked1"
-                  :color="
-                    clicked.clicked1
-                      ? '#E50914'
-                      : '#FFCDD2'
-                  "
-                  :style="
-                  clicked.clicked1
-                  ? 'color:white'
-                  : 'color:black'
-                  "
-                  rounded
+                  :color="clicked.clicked1 ? '#E50914' : '#FFCDD2'"
+                  :style="clicked.clicked1 ? 'color:white' : 'color:black'"
+                  class="my-font"
+                 
                 >
                   신나는
                 </v-btn>
@@ -54,16 +48,8 @@
               <v-col>
                 <v-btn
                   @click="clicked.clicked2 = !clicked.clicked2"
-                  :color="
-                    clicked.clicked2
-                      ? '#E50914'
-                      : '#FFCDD2'
-                  "
-                  :style="
-                  clicked.clicked2
-                  ? 'color:white'
-                  : 'color:black'
-                  "
+                  :color="clicked.clicked2 ? '#E50914' : '#FFCDD2'"
+                  :style="clicked.clicked2 ? 'color:white' : 'color:black'"
                   rounded
                 >
                   활기찬
@@ -72,16 +58,8 @@
               <v-col>
                 <v-btn
                   @click="clicked.clicked3 = !clicked.clicked3"
-                  :color="
-                    clicked.clicked3
-                      ? '#E50914'
-                      : '#FFCDD2'
-                  "
-                  :style="
-                  clicked.clicked3
-                  ? 'color:white'
-                  : 'color:black'
-                  "
+                  :color="clicked.clicked3 ? '#E50914' : '#FFCDD2'"
+                  :style="clicked.clicked3 ? 'color:white' : 'color:black'"
                   rounded
                 >
                   지루한
@@ -90,16 +68,8 @@
               <v-col>
                 <v-btn
                   @click="clicked.clicked4 = !clicked.clicked4"
-                  :color="
-                    clicked.clicked4
-                      ? '#E50914'
-                      : '#FFCDD2'
-                  "
-                  :style="
-                  clicked.clicked4
-                  ? 'color:white'
-                  : 'color:black'
-                  "
+                  :color="clicked.clicked4 ? '#E50914' : '#FFCDD2'"
+                  :style="clicked.clicked4 ? 'color:white' : 'color:black'"
                   rounded
                 >
                   자랑스러운
@@ -108,16 +78,8 @@
               <v-col>
                 <v-btn
                   @click="clicked.clicked5 = !clicked.clicked5"
-                  :color="
-                    clicked.clicked5
-                      ? '#E50914'
-                      : '#FFCDD2'
-                  "
-                  :style="
-                  clicked.clicked5
-                  ? 'color:white'
-                  : 'color:black'
-                  "
+                  :color="clicked.clicked5 ? '#E50914' : '#FFCDD2'"
+                  :style="clicked.clicked5 ? 'color:white' : 'color:black'"
                   rounded
                 >
                   자신감넘치는
@@ -126,16 +88,8 @@
               <v-col>
                 <v-btn
                   @click="clicked.clicked6 = !clicked.clicked6"
-                  :color="
-                    clicked.clicked6
-                      ? '#E50914'
-                      : '#FFCDD2'
-                  "
-                  :style="
-                  clicked.clicked6
-                  ? 'color:white'
-                  : 'color:black'
-                  "
+                  :color="clicked.clicked6 ? '#E50914' : '#FFCDD2'"
+                  :style="clicked.clicked6 ? 'color:white' : 'color:black'"
                   rounded
                 >
                   답답한
@@ -144,16 +98,8 @@
               <v-col>
                 <v-btn
                   @click="clicked.clicked7 = !clicked.clicked7"
-                  :color="
-                    clicked.clicked7
-                      ? '#E50914'
-                      : '#FFCDD2'
-                  "
-                  :style="
-                  clicked.clicked7
-                  ? 'color:white'
-                  : 'color:black'
-                  "
+                  :color="clicked.clicked7 ? '#E50914' : '#FFCDD2'"
+                  :style="clicked.clicked7 ? 'color:white' : 'color:black'"
                   rounded
                 >
                   우울한
@@ -162,16 +108,8 @@
               <v-col>
                 <v-btn
                   @click="clicked.clicked8 = !clicked.clicked8"
-                  :color="
-                    clicked.clicked8
-                      ? '#E50914'
-                      : '#FFCDD2'
-                  "
-                  :style="
-                  clicked.clicked8
-                  ? 'color:white'
-                  : 'color:black'
-                  "
+                  :color="clicked.clicked8 ? '#E50914' : '#FFCDD2'"
+                  :style="clicked.clicked8 ? 'color:white' : 'color:black'"
                   rounded
                 >
                   웃음이필요한
@@ -180,16 +118,8 @@
               <v-col>
                 <v-btn
                   @click="clicked.clicked9 = !clicked.clicked9"
-                  :color="
-                    clicked.clicked9
-                      ? '#E50914'
-                      : '#FFCDD2'
-                  "
-                  :style="
-                  clicked.clicked9
-                  ? 'color:white'
-                  : 'color:black'
-                  "
+                  :color="clicked.clicked9 ? '#E50914' : '#FFCDD2'"
+                  :style="clicked.clicked9 ? 'color:white' : 'color:black'"
                   rounded
                 >
                   짜증나는
@@ -198,16 +128,8 @@
               <v-col>
                 <v-btn
                   @click="clicked.clicked10 = !clicked.clicked10"
-                  :color="
-                    clicked.clicked10
-                      ? '#E50914'
-                      : '#FFCDD2'
-                  "
-                  :style="
-                  clicked.clicked10
-                  ? 'color:white'
-                  : 'color:black'
-                  "
+                  :color="clicked.clicked10 ? '#E50914' : '#FFCDD2'"
+                  :style="clicked.clicked10 ? 'color:white' : 'color:black'"
                   rounded
                 >
                   통쾌한
@@ -216,16 +138,8 @@
               <v-col>
                 <v-btn
                   @click="clicked.clicked11 = !clicked.clicked11"
-                  :color="
-                    clicked.clicked11
-                      ? '#E50914'
-                      : '#FFCDD2'
-                  "
-                  :style="
-                  clicked.clicked11
-                  ? 'color:white'
-                  : 'color:black'
-                  "
+                  :color="clicked.clicked11 ? '#E50914' : '#FFCDD2'"
+                  :style="clicked.clicked11 ? 'color:white' : 'color:black'"
                   rounded
                 >
                   억울한
@@ -234,16 +148,8 @@
               <v-col>
                 <v-btn
                   @click="clicked.clicked12 = !clicked.clicked12"
-                  :color="
-                    clicked.clicked12
-                      ? '#E50914'
-                      : '#FFCDD2'
-                  "
-                  :style="
-                  clicked.clicked12
-                  ? 'color:white'
-                  : 'color:black'
-                  "
+                  :color="clicked.clicked12 ? '#E50914' : '#FFCDD2'"
+                  :style="clicked.clicked12 ? 'color:white' : 'color:black'"
                   rounded
                 >
                   행복한
@@ -252,16 +158,8 @@
               <v-col>
                 <v-btn
                   @click="clicked.clicked13 = !clicked.clicked13"
-                  :color="
-                    clicked.clicked13
-                      ? '#E50914'
-                      : '#FFCDD2'
-                  "
-                  :style="
-                  clicked.clicked13
-                  ? 'color:white'
-                  : 'color:black'
-                  "
+                  :color="clicked.clicked13 ? '#E50914' : '#FFCDD2'"
+                  :style="clicked.clicked13 ? 'color:white' : 'color:black'"
                   rounded
                 >
                   편안한
@@ -270,16 +168,8 @@
               <v-col>
                 <v-btn
                   @click="clicked.clicked14 = !clicked.clicked14"
-                  :color="
-                    clicked.clicked14
-                      ? '#E50914'
-                      : '#FFCDD2'
-                  "
-                  :style="
-                  clicked.clicked14
-                  ? 'color:white'
-                  : 'color:black'
-                  "
+                  :color="clicked.clicked14 ? '#E50914' : '#FFCDD2'"
+                  :style="clicked.clicked14 ? 'color:white' : 'color:black'"
                   rounded
                 >
                   속상한
@@ -288,16 +178,8 @@
               <v-col>
                 <v-btn
                   @click="clicked.clicked15 = !clicked.clicked15"
-                  :color="
-                    clicked.clicked15
-                      ? '#E50914'
-                      : '#FFCDD2'
-                  "
-                  :style="
-                  clicked.clicked15
-                  ? 'color:white'
-                  : 'color:black'
-                  "
+                  :color="clicked.clicked15 ? '#E50914' : '#FFCDD2'"
+                  :style="clicked.clicked15 ? 'color:white' : 'color:black'"
                   rounded
                 >
                   몽환적인
@@ -306,16 +188,8 @@
               <v-col>
                 <v-btn
                   @click="clicked.clicked16 = !clicked.clicked16"
-                  :color="
-                    clicked.clicked16
-                      ? '#E50914'
-                      : '#FFCDD2'
-                  "
-                  :style="
-                  clicked.clicked16
-                  ? 'color:white'
-                  : 'color:black'
-                  "
+                  :color="clicked.clicked16 ? '#E50914' : '#FFCDD2'"
+                  :style="clicked.clicked16 ? 'color:white' : 'color:black'"
                   rounded
                 >
                   현실에서 벗어나고픈
@@ -324,16 +198,8 @@
               <v-col>
                 <v-btn
                   @click="clicked.clicked17 = !clicked.clicked17"
-                  :color="
-                    clicked.clicked17
-                      ? '#E50914'
-                      : '#FFCDD2'
-                  "
-                  :style="
-                  clicked.clicked17
-                  ? 'color:white'
-                  : 'color:black'
-                  "
+                  :color="clicked.clicked17 ? '#E50914' : '#FFCDD2'"
+                  :style="clicked.clicked17 ? 'color:white' : 'color:black'"
                   rounded
                 >
                   지긋지긋한
@@ -342,16 +208,8 @@
               <v-col>
                 <v-btn
                   @click="clicked.clicked18 = !clicked.clicked18"
-                  :color="
-                    clicked.clicked18
-                      ? '#E50914'
-                      : '#FFCDD2'
-                  "
-                  :style="
-                  clicked.clicked18
-                  ? 'color:white'
-                  : 'color:black'
-                  "
+                  :color="clicked.clicked18 ? '#E50914' : '#FFCDD2'"
+                  :style="clicked.clicked18 ? 'color:white' : 'color:black'"
                   rounded
                 >
                   설레는
@@ -360,16 +218,8 @@
               <v-col>
                 <v-btn
                   @click="clicked.clicked19 = !clicked.clicked19"
-                  :color="
-                    clicked.clicked19
-                      ? '#E50914'
-                      : '#FFCDD2'
-                  "
-                  :style="
-                  clicked.clicked19
-                  ? 'color:white'
-                  : 'color:black'
-                  "
+                  :color="clicked.clicked19 ? '#E50914' : '#FFCDD2'"
+                  :style="clicked.clicked19 ? 'color:white' : 'color:black'"
                   rounded
                 >
                   외로운
@@ -378,16 +228,8 @@
               <v-col>
                 <v-btn
                   @click="clicked.clicked20 = !clicked.clicked20"
-                  :color="
-                    clicked.clicked20
-                      ? '#E50914'
-                      : '#FFCDD2'
-                  "
-                  :style="
-                  clicked.clicked20
-                  ? 'color:white'
-                  : 'color:black'
-                  "
+                  :color="clicked.clicked20 ? '#E50914' : '#FFCDD2'"
+                  :style="clicked.clicked20 ? 'color:white' : 'color:black'"
                   rounded
                 >
                   허전한
@@ -396,16 +238,8 @@
               <v-col>
                 <v-btn
                   @click="clicked.clicked21 = !clicked.clicked21"
-                  :color="
-                    clicked.clicked21
-                      ? '#E50914'
-                      : '#FFCDD2'
-                  "
-                  :style="
-                  clicked.clicked21
-                  ? 'color:white'
-                  : 'color:black'
-                  "
+                  :color="clicked.clicked21 ? '#E50914' : '#FFCDD2'"
+                  :style="clicked.clicked21 ? 'color:white' : 'color:black'"
                   rounded
                 >
                   더운
@@ -414,16 +248,8 @@
               <v-col>
                 <v-btn
                   @click="clicked.clicked22 = !clicked.clicked22"
-                  :color="
-                    clicked.clicked22
-                      ? '#E50914'
-                      : '#FFCDD2'
-                  "
-                  :style="
-                  clicked.clicked22
-                  ? 'color:white'
-                  : 'color:black'
-                  "
+                  :color="clicked.clicked22 ? '#E50914' : '#FFCDD2'"
+                  :style="clicked.clicked22 ? 'color:white' : 'color:black'"
                   rounded
                 >
                   흥분되는
@@ -437,7 +263,12 @@
     <br />
     <br />
     <v-sheet class="mx-auto" max-width="1800">
-      <v-slide-group class="pa-4 recommendmovie" active-class="success" show-arrows dark>
+      <v-slide-group
+        class="pa-4 recommendmovie"
+        active-class="success"
+        show-arrows
+        dark
+      >
         <v-slide-item v-for="(rcdMovie, index) in recommendMovie" :key="index">
           <v-card class="ma-4 pa-1" height="450" width="300">
             <div class="text-center">
@@ -467,22 +298,28 @@
                           "
                         ></v-img>
                       </v-col>
-                      <v-col cols="7"  class="pa-0" style="color:#EEEEEE">
-                        <h1>{{rcdMovie.title}}</h1>
-              <br>
-              <br>
-              <div class="d-flex justify-space-around">
-                <div>
-                  <label for="genre">장르 : </label>
-                  <span id="genre" v-for="(genre, index) in rcdMovie.genre_ids" :key="index"> {{genre}}&nbsp;&nbsp;&nbsp; </span>
-                </div>
-              <span>평점 : {{rcdMovie.vote_average}}</span>
-              <span>개봉일 : {{rcdMovie.release_date}}</span>
-              </div>
-              <br>
-              <br>
-              <label for="overview">줄거리 : </label>
-              <span id="overview">{{rcdMovie.overview}}</span>
+                      <v-col cols="7" class="pa-0" style="color: #eeeeee">
+                        <h1>{{ rcdMovie.title }}</h1>
+                        <br />
+                        <br />
+                        <div class="d-flex justify-space-around">
+                          <div>
+                            <label for="genre">장르 : </label>
+                            <span
+                              id="genre"
+                              v-for="(genre, index) in rcdMovie.genre_ids"
+                              :key="index"
+                            >
+                              {{ genre }}&nbsp;&nbsp;&nbsp;
+                            </span>
+                          </div>
+                          <span>평점 : {{ rcdMovie.vote_average }}</span>
+                          <span>개봉일 : {{ rcdMovie.release_date }}</span>
+                        </div>
+                        <br />
+                        <br />
+                        <label for="overview">줄거리 : </label>
+                        <span id="overview">{{ rcdMovie.overview }}</span>
                       </v-col>
                     </v-row>
                   </v-card-text>
@@ -504,9 +341,9 @@ export default {
   methods: {
     resetMoods() {
       if (!this.isLoggedIn) {
-        alert('로그인 해주세요')
-        this.$router.push('login')
-        return
+        alert("로그인 해주세요");
+        this.$router.push("login");
+        return;
       }
       for (let id in this.clicked) {
         this.clicked[id] = false;
@@ -557,7 +394,7 @@ export default {
           }
         }
       }
-      this.getGenre()
+      this.getGenre();
       this.dialog = false;
       console.log(this.recommendMovie);
     },
@@ -671,11 +508,25 @@ export default {
 </script>
 
 <style>
-.recommendpage{
+@font-face {
+    font-family: 'SANJUGotgam';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/SANJUGotgam.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.recommendpage {
   background-color: #000000;
   color: white;
-  }
-  .recommendmovie{
+}
+.recommendmovie {
   background-color: black;
+}
+.my-font{
+  font-family: SANJUGotgam
+}
+.my-font2{
+  font-family: SANJUGotgam;
+  background-color: black;
+  
 }
 </style>
