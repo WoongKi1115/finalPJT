@@ -1,32 +1,12 @@
 <template>
-	<div style="color:white">
-		<v-divider></v-divider>
-		<div style="background-color:white; color:black;" class="text-center d-flex align-items-center">
-		<v-row>
-			<v-col cols="1" style="border-right:1px solid black;" class="pe-0 d-flex align-self-center justify-center">
-				{{article.id}}
-			</v-col>
-			<v-col @click="goDetail(article.id)"  style="
-                border-right: 1px solid black;
-              " cols="6" class="d-flex align-self-center justify-center">
-				{{article.title}}
-			</v-col>
-			<v-col style="border-right: 1px solid black;"
-			cols="2" class="d-flex align-self-center justify-center">
-				{{article.created_at | moment('YYYY-MM-DD HH:mm:ss')}}
-			</v-col>
-			<v-col style="
-                border-right: 1px solid black;
-              " cols="2" class="d-flex align-self-center justify-center">
-				{{article.username}}
-			</v-col>
-			<v-col  cols="1" class="ps-0">
-				댓글 수
-			</v-col>
+	<div @click="goDetail(article.id)" class="selectArticle board_list_body pa-4 d-flex align-items-center" :class="{'id_hol':checkId}">
+		<div class="articles_id" :class={}>{{ article.id }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+          <div class="articles_title">{{ article.title }}</div>
+          <div class="articles_username">{{ article.username }}</div>
+          <div class="articles_created_at">{{article.created_at | moment('YYYY-MM-DD HH:mm:ss')}}</div>
+          <div class="articles_views"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;댓글</div>
+	</div>
 
-		</v-row>
-	</div>
-	</div>
 </template>
 
 <script>
@@ -38,6 +18,7 @@ export default {
 	data() {
 		return {
 			datetime:null,
+			checkId:false,
 		}
 	},
 	props:{
@@ -47,10 +28,48 @@ export default {
 		goDetail(id) {
 			this.$router.push({name:'communityDetail', params:{id}})
 		},
+	},
+	created() {
 	}
 }
 </script>
 
 <style>
+.selectArticle:hover {
+  background-color: #333333;
+}
 
+.board_list_body {
+	display: inline-block;
+	font-size:19px;
+	border-bottom: 1px solid;
+}
+.id_hol {
+	background-color: gary;
+}
+.id_hod {
+	background-color: black;
+}
+
+.articles_id {
+  float: left;
+  width: 10%;
+}
+.articles_title {
+  float: left;
+  width: 55%;
+  text-align: left;
+}
+.articles_username {
+  float: left;
+  width: 10%;
+}
+.articles_created_at {
+  float: left;
+  width: 15%;
+}
+.articles_views {
+  float: left;
+  width: 10%;
+}
 </style>

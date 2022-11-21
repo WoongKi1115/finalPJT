@@ -2,67 +2,53 @@
   <div class="communitypage">
     <h1>Community</h1>
     <v-btn @click="moveCreate">create</v-btn>
-    <v-row class="ma-5">
-      <v-col cols="1"></v-col>
-      <v-col cols="10" class="pa-0" style="border-radius:10px;">
-        <div
-          style="background-color: white; color: black"
-          class="text-center d-flex align-items-center"
-        >
-          <v-row>
-            <v-col
-              class="pe-0 d-flex align-self-center justify-center"
-              cols="1"
-              style="
-                border-right: 1px solid black;
-              "
-            >
-              ID
-            </v-col>
-            <v-col style="
-                border-right: 1px solid black;
-              " cols="6" class="d-flex align-self-center justify-center"> TITLE </v-col>
-            <v-col style="
-                border-right: 1px solid black;
-              " cols="2" class="d-flex align-self-center justify-center"> 작성시간 </v-col>
-            <v-col style="
-                border-right: 1px solid black;
-              " cols="2" class="d-flex align-self-center justify-center"> 작성자 </v-col>
-            <v-col cols="1" class="ps-0"> 댓글 수 </v-col>
-          </v-row>
+    <div class="board_list_wrap">
+      <div class="board_list">
+        <div class="board_list_head">
+          <div class="articles_id" style="border-top: 2px solid #E50914;
+  border-bottom: 2px solid #E50914;">#</div>
+          <div class="articles_title" style="border-top: 2px solid #E50914;
+  border-bottom: 2px solid #E50914;">제목</div>
+          <div class="articles_username" style="border-top: 2px solid #E50914;
+  border-bottom: 2px solid #E50914;">작성자</div>
+          <div class="articles_created_at" style="border-top: 2px solid #E50914;
+  border-bottom: 2px solid #E50914;">작성일</div>
+          <div class="articles_views" style="border-top: 2px solid #E50914;
+  border-bottom: 2px solid #E50914;">조회</div>
         </div>
+        <div >
         <communityItem
           v-for="article in articles"
           :key="article.id"
           :article="article"
+          class="board_list_body1"
         />
-      </v-col>
-      <v-col cols="1"></v-col>
-    </v-row>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import communityItem from "@/components/communityItem";
-
 export default {
   name: "CommunityView",
-  data(){
+  data() {
     return {
-      isLoggedIn: false,
-    }
+
+    };
   },
   computed: {
     articles() {
       return this.$store.state.articles;
-    },
+    },    
   },
   components: {
     communityItem,
   },
   methods: {
     moveCreate() {
-      if (!this.isLoggedIn){
+      if (!this.isLoggedIn) {
         alert("로그인 해주세요");
         this.$router.push("login");
         return;
@@ -84,7 +70,37 @@ export default {
 </script>
 
 <style>
-.communitypage{
-  font-size: 24px;
+
+
+.board_list_wrap {
+  padding: 50px;
+}
+.board_list_head > div {
+  display: inline-block;
+  font-weight: 600;
+}
+.board_list_head {
+  padding: 10px 0;
+}
+.board_list_body1 {
+  display: block
+}
+.board_list_head .articles_title {
+  text-align: center;
+}
+.articles_id {
+  width: 10%;
+}
+.articles_title {
+  width: 55%;
+}
+.articles_username {
+  width: 10%;
+}
+.articles_created_at {
+  width: 15%;
+}
+.articles_views {
+  width: 10%;
 }
 </style>
