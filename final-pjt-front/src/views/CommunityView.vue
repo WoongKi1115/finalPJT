@@ -1,7 +1,10 @@
 <template>
   <div class="communitypage">
     <h1>Community</h1>
-    <v-btn @click="moveCreate">create</v-btn>
+    <v-btn
+    color="#E50914"
+    dark
+    @click="moveCreate">create</v-btn>
     <div class="board_list_wrap">
       <div class="board_list">
         <div class="board_list_head">
