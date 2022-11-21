@@ -22,12 +22,11 @@
           </v-btn>
         </template>
         <v-card>
-          <v-toolbar dark color="E50914" class="mb-5">
+          <v-toolbar dark color="#E50914" class="mb-5">
             <v-btn icon dark @click="dialog = false">
               <v-icon>mdi-close</v-icon>
             </v-btn>
             <v-toolbar-title>오늘어때?</v-toolbar-title>
-            <v-spacer></v-spacer>
             <v-toolbar-items>
               <v-btn dark text @click="[save()]"> 추천받기 </v-btn>
             </v-toolbar-items>
@@ -39,8 +38,13 @@
                   @click="clicked.clicked1 = !clicked.clicked1"
                   :color="
                     clicked.clicked1
-                      ? 'deep-purple lighten-1'
-                      : 'deep-purple lighten-4'
+                      ? ''
+                      : 'red darken-1'
+                  "
+                  :style="
+                  clicked.clicked1
+                  ? 'color:black'
+                  : 'color:white'
                   "
                   rounded
                 >
@@ -53,7 +57,7 @@
                   :color="
                     clicked.clicked2
                       ? 'deep-purple lighten-1'
-                      : 'deep-purple lighten-4'
+                      : '#E50914'
                   "
                   rounded
                 >
