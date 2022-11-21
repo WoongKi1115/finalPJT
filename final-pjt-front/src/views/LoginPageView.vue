@@ -5,7 +5,7 @@
   <div class="loginpage">
     <h1>Login</h1>
     <v-row justify="center" align="center">
-      <v-col cols="12" sm="5" md="5">
+      <v-col cols="10">
         <v-text-field
           label="사용자 이름"
           placeholder="Username"
