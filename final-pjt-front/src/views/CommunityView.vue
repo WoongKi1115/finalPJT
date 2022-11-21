@@ -42,6 +42,11 @@ import communityItem from "@/components/communityItem";
 
 export default {
   name: "CommunityView",
+  data(){
+    return {
+      isLoggedIn: false,
+    }
+  },
   computed: {
     articles() {
       return this.$store.state.articles;
@@ -52,15 +57,17 @@ export default {
   },
   methods: {
     moveCreate() {
+      if (!this.isLoggedIn){
+        alert("로그인 해주세요");
+        this.$router.push("login");
+        return;
+      }
       this.$router.push("create");
     },
     getArticle() {
       axios({
         method: "get",
         url: `${API_URL}/community/`,
-        headers: {
-          Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
-        },
       })
         .then((res) => {
           this.$store.state.articles = res.data;
@@ -69,10 +76,17 @@ export default {
           console.log(err);
         });
     },
+    isLogin() {
+      if (window.localStorage.getItem("jwt")) {
+        this.isLoggedIn = true;
+      } else {
+        this.isLoggedIn = false;
+      }
+    },
   },
   created() {
     this.getArticle();
-    console.log();
+    this.isLogin();
   },
 };
 </script>
