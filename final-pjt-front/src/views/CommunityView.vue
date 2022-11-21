@@ -11,7 +11,7 @@ export default {
 	name:'CommunityView',
 	methods:{
 		moveCreate() {
-			this.$router.push('@/components/createArticle')
+			this.$router.push('create')
 		}
 	}
 }
