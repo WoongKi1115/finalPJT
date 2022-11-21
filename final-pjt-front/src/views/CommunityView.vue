@@ -36,8 +36,6 @@
 </template>
 
 <script>
-import axios from "axios";
-const API_URL = "http://127.0.0.1:8000";
 import communityItem from "@/components/communityItem";
 
 export default {
@@ -64,18 +62,6 @@ export default {
       }
       this.$router.push("create");
     },
-    getArticle() {
-      axios({
-        method: "get",
-        url: `${API_URL}/community/`,
-      })
-        .then((res) => {
-          this.$store.state.articles = res.data;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
     isLogin() {
       if (window.localStorage.getItem("jwt")) {
         this.isLoggedIn = true;
@@ -85,7 +71,6 @@ export default {
     },
   },
   created() {
-    this.getArticle();
     this.isLogin();
   },
 };

@@ -42,6 +42,7 @@
 <script>
 import axios from "axios";
 import _ from "lodash"
+const API_URL = "http://127.0.0.1:8000";
 
 export default {
   name: "App",
@@ -165,6 +166,18 @@ export default {
       }
       this.$store.state.classifiedMovie = this.calssifiedGenres
     },
+    getArticle() {
+      axios({
+        method: "get",
+        url: `${API_URL}/community/`,
+      })
+        .then((res) => {
+          this.$store.state.articles = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
 
     // 로그인쪽
     isLogin() {
@@ -184,6 +197,7 @@ export default {
   created() {
     this.getMovies();
     this.isLogin();
+    this.getArticle();
   },
 };
 </script>
