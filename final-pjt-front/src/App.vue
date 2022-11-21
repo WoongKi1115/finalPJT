@@ -24,8 +24,11 @@
           >Login</router-link
         >
         <button v-show="this.isLoggedIn" @click="logOut" style="text-decoration:none">Loggout</button>
-        <router-link style="text-decoration:none" :to="{ name: 'signup' }" class="white--text mx-3"
-          >회원가입</router-link
+        <router-link  v-show="!this.isLoggedIn" style="text-decoration:none" :to="{ name: 'signup' }" class="white--text mx-3"
+          >Signup</router-link
+        >
+        <router-link  v-show="this.isLoggedIn" style="text-decoration:none" :to="{ name: 'mypage' }" class="white--text mx-3"
+          >Mypage</router-link
         >
       </div>
     </v-app-bar>

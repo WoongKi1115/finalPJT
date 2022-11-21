@@ -6,6 +6,7 @@ import LoginPageView from '@/views/LoginPageView'
 import SignupPageView from '@/views/SignupPageView'
 import CommunityView from '@/views/CommunityView'
 import createArticle from '@/views/createArticle'
+import MyPageView from '@/views/MyPageView'
 
 Vue.use(VueRouter)
 
@@ -40,6 +41,11 @@ const routes = [
     name: 'createArticle',
     component: createArticle
   },
+  {
+    path: '/mypage',
+    name: 'mypage',
+    component: MyPageView
+  }
 ]
 
 const router = new VueRouter({
