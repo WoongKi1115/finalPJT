@@ -38,13 +38,13 @@
                   @click="clicked.clicked1 = !clicked.clicked1"
                   :color="
                     clicked.clicked1
-                      ? ''
-                      : 'red darken-1'
+                      ? '#E50914'
+                      : '#FFCDD2'
                   "
                   :style="
                   clicked.clicked1
-                  ? 'color:black'
-                  : 'color:white'
+                  ? 'color:white'
+                  : 'color:black'
                   "
                   rounded
                 >
@@ -56,8 +56,13 @@
                   @click="clicked.clicked2 = !clicked.clicked2"
                   :color="
                     clicked.clicked2
-                      ? 'deep-purple lighten-1'
-                      : '#E50914'
+                      ? '#E50914'
+                      : '#FFCDD2'
+                  "
+                  :style="
+                  clicked.clicked2
+                  ? 'color:white'
+                  : 'color:black'
                   "
                   rounded
                 >
@@ -69,8 +74,13 @@
                   @click="clicked.clicked3 = !clicked.clicked3"
                   :color="
                     clicked.clicked3
-                      ? 'deep-purple lighten-1'
-                      : 'deep-purple lighten-4'
+                      ? '#E50914'
+                      : '#FFCDD2'
+                  "
+                  :style="
+                  clicked.clicked3
+                  ? 'color:white'
+                  : 'color:black'
                   "
                   rounded
                 >
@@ -82,8 +92,13 @@
                   @click="clicked.clicked4 = !clicked.clicked4"
                   :color="
                     clicked.clicked4
-                      ? 'deep-purple lighten-1'
-                      : 'deep-purple lighten-4'
+                      ? '#E50914'
+                      : '#FFCDD2'
+                  "
+                  :style="
+                  clicked.clicked4
+                  ? 'color:white'
+                  : 'color:black'
                   "
                   rounded
                 >
@@ -95,8 +110,13 @@
                   @click="clicked.clicked5 = !clicked.clicked5"
                   :color="
                     clicked.clicked5
-                      ? 'deep-purple lighten-1'
-                      : 'deep-purple lighten-4'
+                      ? '#E50914'
+                      : '#FFCDD2'
+                  "
+                  :style="
+                  clicked.clicked5
+                  ? 'color:white'
+                  : 'color:black'
                   "
                   rounded
                 >
@@ -108,8 +128,13 @@
                   @click="clicked.clicked6 = !clicked.clicked6"
                   :color="
                     clicked.clicked6
-                      ? 'deep-purple lighten-1'
-                      : 'deep-purple lighten-4'
+                      ? '#E50914'
+                      : '#FFCDD2'
+                  "
+                  :style="
+                  clicked.clicked6
+                  ? 'color:white'
+                  : 'color:black'
                   "
                   rounded
                 >
@@ -121,8 +146,13 @@
                   @click="clicked.clicked7 = !clicked.clicked7"
                   :color="
                     clicked.clicked7
-                      ? 'deep-purple lighten-1'
-                      : 'deep-purple lighten-4'
+                      ? '#E50914'
+                      : '#FFCDD2'
+                  "
+                  :style="
+                  clicked.clicked7
+                  ? 'color:white'
+                  : 'color:black'
                   "
                   rounded
                 >
@@ -134,8 +164,13 @@
                   @click="clicked.clicked8 = !clicked.clicked8"
                   :color="
                     clicked.clicked8
-                      ? 'deep-purple lighten-1'
-                      : 'deep-purple lighten-4'
+                      ? '#E50914'
+                      : '#FFCDD2'
+                  "
+                  :style="
+                  clicked.clicked8
+                  ? 'color:white'
+                  : 'color:black'
                   "
                   rounded
                 >
@@ -147,8 +182,13 @@
                   @click="clicked.clicked9 = !clicked.clicked9"
                   :color="
                     clicked.clicked9
-                      ? 'deep-purple lighten-1'
-                      : 'deep-purple lighten-4'
+                      ? '#E50914'
+                      : '#FFCDD2'
+                  "
+                  :style="
+                  clicked.clicked9
+                  ? 'color:white'
+                  : 'color:black'
                   "
                   rounded
                 >
@@ -160,8 +200,13 @@
                   @click="clicked.clicked10 = !clicked.clicked10"
                   :color="
                     clicked.clicked10
-                      ? 'deep-purple lighten-1'
-                      : 'deep-purple lighten-4'
+                      ? '#E50914'
+                      : '#FFCDD2'
+                  "
+                  :style="
+                  clicked.clicked10
+                  ? 'color:white'
+                  : 'color:black'
                   "
                   rounded
                 >
@@ -173,8 +218,13 @@
                   @click="clicked.clicked11 = !clicked.clicked11"
                   :color="
                     clicked.clicked11
-                      ? 'deep-purple lighten-1'
-                      : 'deep-purple lighten-4'
+                      ? '#E50914'
+                      : '#FFCDD2'
+                  "
+                  :style="
+                  clicked.clicked11
+                  ? 'color:white'
+                  : 'color:black'
                   "
                   rounded
                 >
@@ -186,8 +236,13 @@
                   @click="clicked.clicked12 = !clicked.clicked12"
                   :color="
                     clicked.clicked12
-                      ? 'deep-purple lighten-1'
-                      : 'deep-purple lighten-4'
+                      ? '#E50914'
+                      : '#FFCDD2'
+                  "
+                  :style="
+                  clicked.clicked12
+                  ? 'color:white'
+                  : 'color:black'
                   "
                   rounded
                 >
@@ -199,8 +254,13 @@
                   @click="clicked.clicked13 = !clicked.clicked13"
                   :color="
                     clicked.clicked13
-                      ? 'deep-purple lighten-1'
-                      : 'deep-purple lighten-4'
+                      ? '#E50914'
+                      : '#FFCDD2'
+                  "
+                  :style="
+                  clicked.clicked13
+                  ? 'color:white'
+                  : 'color:black'
                   "
                   rounded
                 >
@@ -212,8 +272,13 @@
                   @click="clicked.clicked14 = !clicked.clicked14"
                   :color="
                     clicked.clicked14
-                      ? 'deep-purple lighten-1'
-                      : 'deep-purple lighten-4'
+                      ? '#E50914'
+                      : '#FFCDD2'
+                  "
+                  :style="
+                  clicked.clicked14
+                  ? 'color:white'
+                  : 'color:black'
                   "
                   rounded
                 >
@@ -225,8 +290,13 @@
                   @click="clicked.clicked15 = !clicked.clicked15"
                   :color="
                     clicked.clicked15
-                      ? 'deep-purple lighten-1'
-                      : 'deep-purple lighten-4'
+                      ? '#E50914'
+                      : '#FFCDD2'
+                  "
+                  :style="
+                  clicked.clicked15
+                  ? 'color:white'
+                  : 'color:black'
                   "
                   rounded
                 >
@@ -238,8 +308,13 @@
                   @click="clicked.clicked16 = !clicked.clicked16"
                   :color="
                     clicked.clicked16
-                      ? 'deep-purple lighten-1'
-                      : 'deep-purple lighten-4'
+                      ? '#E50914'
+                      : '#FFCDD2'
+                  "
+                  :style="
+                  clicked.clicked16
+                  ? 'color:white'
+                  : 'color:black'
                   "
                   rounded
                 >
@@ -251,8 +326,13 @@
                   @click="clicked.clicked17 = !clicked.clicked17"
                   :color="
                     clicked.clicked17
-                      ? 'deep-purple lighten-1'
-                      : 'deep-purple lighten-4'
+                      ? '#E50914'
+                      : '#FFCDD2'
+                  "
+                  :style="
+                  clicked.clicked17
+                  ? 'color:white'
+                  : 'color:black'
                   "
                   rounded
                 >
@@ -264,8 +344,13 @@
                   @click="clicked.clicked18 = !clicked.clicked18"
                   :color="
                     clicked.clicked18
-                      ? 'deep-purple lighten-1'
-                      : 'deep-purple lighten-4'
+                      ? '#E50914'
+                      : '#FFCDD2'
+                  "
+                  :style="
+                  clicked.clicked18
+                  ? 'color:white'
+                  : 'color:black'
                   "
                   rounded
                 >
@@ -277,8 +362,13 @@
                   @click="clicked.clicked19 = !clicked.clicked19"
                   :color="
                     clicked.clicked19
-                      ? 'deep-purple lighten-1'
-                      : 'deep-purple lighten-4'
+                      ? '#E50914'
+                      : '#FFCDD2'
+                  "
+                  :style="
+                  clicked.clicked19
+                  ? 'color:white'
+                  : 'color:black'
                   "
                   rounded
                 >
@@ -290,8 +380,13 @@
                   @click="clicked.clicked20 = !clicked.clicked20"
                   :color="
                     clicked.clicked20
-                      ? 'deep-purple lighten-1'
-                      : 'deep-purple lighten-4'
+                      ? '#E50914'
+                      : '#FFCDD2'
+                  "
+                  :style="
+                  clicked.clicked20
+                  ? 'color:white'
+                  : 'color:black'
                   "
                   rounded
                 >
@@ -303,8 +398,13 @@
                   @click="clicked.clicked21 = !clicked.clicked21"
                   :color="
                     clicked.clicked21
-                      ? 'deep-purple lighten-1'
-                      : 'deep-purple lighten-4'
+                      ? '#E50914'
+                      : '#FFCDD2'
+                  "
+                  :style="
+                  clicked.clicked21
+                  ? 'color:white'
+                  : 'color:black'
                   "
                   rounded
                 >
@@ -316,8 +416,13 @@
                   @click="clicked.clicked22 = !clicked.clicked22"
                   :color="
                     clicked.clicked22
-                      ? 'deep-purple lighten-1'
-                      : 'deep-purple lighten-4'
+                      ? '#E50914'
+                      : '#FFCDD2'
+                  "
+                  :style="
+                  clicked.clicked22
+                  ? 'color:white'
+                  : 'color:black'
                   "
                   rounded
                 >
@@ -398,6 +503,11 @@ export default {
   name: "MoviePickView",
   methods: {
     resetMoods() {
+      if (!this.isLoggedIn) {
+        alert('로그인 해주세요')
+        this.$router.push('login')
+        return
+      }
       for (let id in this.clicked) {
         this.clicked[id] = false;
       }
@@ -462,6 +572,13 @@ export default {
         movie.genre_ids = newGenre;
       }
     },
+    isLogin() {
+      if (window.localStorage.getItem("jwt")) {
+        this.isLoggedIn = true;
+      } else {
+        this.isLoggedIn = false;
+      }
+    },
   },
   components: {
     // moviePickitem,
@@ -473,6 +590,7 @@ export default {
   },
   data() {
     return {
+      isLoggedIn: false,
       dialog: false,
       clickedCount: 0,
       clicked: {
@@ -545,6 +663,9 @@ export default {
       recommendMovie: [],
       recommendMovieId: [],
     };
+  },
+  created() {
+    this.isLogin();
   },
 };
 </script>
