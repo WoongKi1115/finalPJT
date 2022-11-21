@@ -1,13 +1,19 @@
 <template>
 	<div>
-		<h1>Community</h1>+
-		
+		<h1>Community</h1>
+		<v-btn @click="moveCreate">create</v-btn>
 	</div>
 </template>
 
 <script>
+
 export default {
-	name:'CommunityView'
+	name:'CommunityView',
+	methods:{
+		moveCreate() {
+			this.$router.push('@/components/createArticle')
+		}
+	}
 }
 </script>
 
