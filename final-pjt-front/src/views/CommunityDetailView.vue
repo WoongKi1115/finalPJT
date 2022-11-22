@@ -89,8 +89,6 @@ export default {
 </script>
 
 <style>
-.comment {
-}
 .detailpage{
   width: 80%;
   margin : auto;

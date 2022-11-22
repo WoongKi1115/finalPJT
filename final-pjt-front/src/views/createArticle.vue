@@ -2,6 +2,17 @@
   <v-row>
     <v-col cols="2"></v-col>
     <v-col cols="8" class="createArticle">
+      <v-btn
+      style="float:right"
+      class=""
+      fab
+      dark
+      x-small
+      color="gray"
+      @click="goCommunity"
+    >
+    X
+    </v-btn>
       <h1 style="color:black">Create</h1>
     <div>
       <form>
@@ -41,6 +52,9 @@
       }
     },
     methods: {
+      goCommunity() {
+      this.$router.push({name:"community"})
+    },
       createArticle() {
         const title = this.title
         const content = this.content
