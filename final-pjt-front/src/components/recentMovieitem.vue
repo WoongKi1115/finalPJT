@@ -145,47 +145,57 @@
                               </v-btn>
                             </div>
                             <v-list-item two-line>
-                              <v-list-item-content
-                                style="color: #eeeeee"
-                              >
+                              <v-list-item-content style="color: #eeeeee">
                                 <v-list-item-title
                                   class="mt-2"
-                                  style="display:float"
+                                  style="display: float"
                                   v-for="(comment, index) in calData"
                                   :key="index"
                                 >
-                                <div>
-                                  <div style="font-size: large; float:left; width:5%" class="me-10"
-                                    >{{ comment.username }}&nbsp;&nbsp;</div
-                                  >
-                                  <div style="float:left; width:20%">
-                                  <star-rating
-                                    :rating="comment.rates"
-                                    :read-only="true"
-                                    :show-rating="false"
-                                    :star-size="20"
-                                  ></star-rating>
+                                  <div>
+                                    <div
+                                      style="
+                                        font-size: large;
+                                        float: left;
+                                        width: 5%;
+                                      "
+                                      class="me-10"
+                                    >
+                                      {{ comment.username }}&nbsp;&nbsp;
+                                    </div>
+                                    <div style="float: left; width: 20%">
+                                      <star-rating
+                                        :rating="comment.rates"
+                                        :read-only="true"
+                                        :show-rating="false"
+                                        :star-size="20"
+                                      ></star-rating>
+                                    </div>
+                                    <div
+                                      style="float: left; width: 45%"
+                                      class="mt-1"
+                                    >
+                                      {{
+                                        comment.movie_comment
+                                      }}&nbsp;&nbsp;&nbsp;&nbsp;
+                                      <button
+                                        v-show="comment.user === userId"
+                                        @click="deleteComment(comment.id)"
+                                      >
+                                        <i class="fa-solid fa-trash-can"></i>
+                                      </button>
+                                    </div>
+                                    <div
+                                      style="float: left; width: 15%"
+                                      class="mt-1"
+                                    >
+                                      {{
+                                        comment.created_at
+                                          | moment("YYYY-MM-DD HH:mm:ss")
+                                      }}
+                                    </div>
                                   </div>
-                                  <div
-                                   style="float:left; width:45%"
-                                   class="mt-1"
-                                    >{{
-                                      comment.movie_comment
-                                    }}&nbsp;&nbsp;&nbsp;&nbsp;
-                                  <button
-                                    v-show="comment.user === userId"
-                                    @click="deleteComment(comment.id)"
-                                  >
-                                    <i class="fa-solid fa-trash-can"></i>
-                                  </button>
-                                  </div
-                                  >
-                                  <div style="float:left; width:15%" class="mt-1">{{
-                                    comment.created_at
-                                      | moment("YYYY-MM-DD HH:mm:ss")
-                                  }}</div>
-                                  </div>
-                                  <br>
+                                  <br />
                                   <v-divider class="mt-2" dark></v-divider>
                                 </v-list-item-title>
                                 <div class="text-center">
@@ -292,9 +302,15 @@ export default {
           this.userId = this.$store.state.loginUser.id;
           this.getAvg();
         });
+        
+        
         this.recentMovieComment = "";
         this.rating = 3;
-      });
+      })
+      .catch(() => {
+          alert("로그인해!");
+          this.$router.push("login");
+        });
     },
     getMovieComment(pickedMovie) {
       axios({
