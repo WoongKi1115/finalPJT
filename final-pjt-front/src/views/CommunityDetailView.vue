@@ -36,7 +36,7 @@
         label="댓글작성"
         v-model="inputComment"
         dark
-        style="background-color: #222222; width: 95%; margin: auto;"
+        style="background-color: #323232; width: 95%; margin: auto;"
         @keyup.enter="createComment"
         ></v-text-field>
       </div>
@@ -164,7 +164,7 @@ export default {
   margin-top: 90px;
   border-radius: 20px;
   padding: 25px;
-  background-color: #222222;
+  background-color: #323232;
   color: white;
 }
 </style>

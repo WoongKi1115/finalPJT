@@ -89,14 +89,7 @@
                             "
                           >
                             <div
-                              class="
-                                d-flex
-                                justify-content-around
-                                mt-1
-                                pa-5
-                                pb-5
-                                pt-0
-                              "
+                              class="d-flex justify-content-around mt-1 pa-5 pb-5 pt-0"
                             >
                               <div class="text-center mb-3">
                                 <span
@@ -105,13 +98,14 @@
                                 >
                                   ({{ rating }})
                                 </span>
-                                <v-rating
-                                  half-increments
-                                  color="yellow"
-                                  bg-color="orange-lighten-1"
+                                <star-rating
+                                  :increment="0.5"
                                   v-model="rating"
-                                  hover
-                                ></v-rating>
+                                  :star-size="35"
+                                  :show-rating="false"
+                                  :glow="5"
+                                  :animate="true"
+                                ></star-rating>
                               </div>
                               <v-text-field
                                 @keyup.enter="createMovieComment(recentmovie)"
@@ -126,15 +120,23 @@
                               ></v-text-field>
                             </div>
                             <v-list-item two-line>
-                              <v-list-item-content style="text-align: left; color: #eeeeee;">
+                              <v-list-item-content
+                                style="text-align: left; color: #eeeeee"
+                              >
                                 <v-list-item-title
                                   class="mt-2"
-                                  v-for="(comment, index) in movie_comment"
+                                  v-for="(comment, index) in calData"
                                   :key="index"
                                 >
                                   <span style="font-size: large" class="me-10"
                                     >{{ comment.username }}&nbsp;&nbsp;</span
                                   >
+                                  <star-rating
+                                    :rating="comment.rates"
+                                    :read-only="true"
+                                    :show-rating="false"
+                                    :star-size="20"
+                                  ></star-rating>
                                   <span
                                     >{{
                                       comment.movie_comment
@@ -144,7 +146,7 @@
                                     v-show="comment.user === userId"
                                     @click="deleteComment(comment.id)"
                                   >
-                                  <i class="fa-solid fa-trash-can"></i>
+                                    <i class="fa-solid fa-trash-can"></i>
                                   </button>
                                   <span style="float: right">{{
                                     comment.created_at
@@ -152,6 +154,12 @@
                                   }}</span>
                                   <v-divider class="mt-2"></v-divider>
                                 </v-list-item-title>
+                                <div class="text-center">
+                                  <v-pagination
+                                    v-model="curPageNum"
+                                    :length="numOfPages"
+                                  ></v-pagination>
+                                </div>
                               </v-list-item-content>
                             </v-list-item>
                           </div>
@@ -170,20 +178,31 @@
 </template>
 
 <script>
+import StarRating from "vue-star-rating";
 import axios from "axios";
 const API_URL = "http://127.0.0.1:8000";
 export default {
   name: "recentMovieitem",
+  components: {
+    StarRating,
+  },
   data() {
     return {
+      dataPerPage: 3,
+      curPageNum: 1,
       valid: false,
       recentMovieComment: "",
       model: null,
       userId: null,
       rating: 3,
       movie_comment: null,
-      pickedMovieId:null,
+      pickedMovieId: null,
       nameRules: [(v) => v.length <= 50 || "댓글은 50자 이내로 작성해주세요!"],
+      // 아래 4개가 번호에 대한 변수
+      startOffset:null,
+      endOffset:null,
+      numOfPages:null,
+      calData:null
     };
   },
   computed: {
@@ -208,8 +227,12 @@ export default {
           url: `${API_URL}/api/v1/${pickedMovie.id}/moviecomment/`,
         }).then((res) => {
           this.movie_comment = res.data;
-          this.pickedMovieId = pickedMovie.id
+          this.pickedMovieId = pickedMovie.id;
           this.userId = this.$store.state.loginUser.id;
+          this.startOffset=((this.curPageNum - 1) * this.dataPerPage);
+          this.endOffset= (this.startOffset + this.dataPerPage);
+          this.numOfPages = Math.ceil(this.movie_comment.length / this.dataPerPage);
+          this.calData= this.movie_comment.slice(this.startOffset, this.endOffset)
         });
         this.recentMovieComment = "";
         this.rating = 3;
@@ -219,10 +242,15 @@ export default {
       axios({
         method: "get",
         url: `${API_URL}/api/v1/${pickedMovie.id}/moviecomment/`,
-      }).then((res) => {
+      })
+      .then((res) => {
         this.movie_comment = res.data;
-        this.pickedMovieId = pickedMovie.id
+        this.pickedMovieId = pickedMovie.id;
         this.userId = this.$store.state.loginUser.id;
+        this.startOffset=((this.curPageNum - 1) * this.dataPerPage);
+        this.endOffset= (this.startOffset + this.dataPerPage);
+        this.numOfPages = Math.ceil(this.movie_comment.length / this.dataPerPage);
+        this.calData= this.movie_comment.slice(this.startOffset, this.endOffset)
       });
     },
     deleteComment(pickedComment) {
@@ -232,16 +260,15 @@ export default {
         headers: {
           Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
         },
-      })
-      .then(() => {
+      }).then(() => {
         axios({
           method: "get",
           url: `${API_URL}/api/v1/${this.pickedMovieId}/moviecomment/`,
         }).then((res) => {
           this.movie_comment = res.data;
-      })})
-
-    }
+        });
+      });
+    },
   },
 };
 </script>
