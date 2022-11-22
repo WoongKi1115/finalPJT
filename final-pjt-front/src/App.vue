@@ -184,6 +184,16 @@ export default {
     isLogin() {
       if (window.localStorage.getItem("jwt")) {
         this.isLoggedIn = true;
+        axios({
+          method: "get",
+          url: "http://127.0.0.1:8000/accounts/whoareyou/",
+          headers:{
+            Authorization: `Bearer ${window.localStorage.getItem('jwt')}`
+          }
+        })
+        .then((res) =>{
+          this.$store.state.loginUser = res.data
+        })
       } else {
         this.isLoggedIn = false;
       }
@@ -192,6 +202,7 @@ export default {
       window.localStorage.removeItem("jwt");
       this.$router.push({ name: "login" });
       this.isLoggedIn = false;
+      this.$store.state.loginUser = null
     },
   },
 

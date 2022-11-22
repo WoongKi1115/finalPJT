@@ -20,3 +20,13 @@ def signup(request):
         user.set_password(request.data.get("password"))
         user.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+@api_view(['GET'])
+def whoareyou(request):
+    you = request.user
+    print(you)
+    if not request.user.is_authenticated:
+        return Response({"message": "no auth"}, status=status.HTTP_401_UNAUTHORIZED)
+    else:
+        serializer = UserSerializer(you)
+        return Response(serializer.data,)
