@@ -140,12 +140,12 @@
                                       comment.movie_comment
                                     }}&nbsp;&nbsp;&nbsp;&nbsp;</span
                                   >
-                                  <!-- <button
+                                  <button
                                     v-show="comment.user === userId"
                                     @click="deleteComment(comment.id)"
-                                  > -->
-                                  <!-- <i class="fa-solid fa-trash-can"></i>
-                                  </button> -->
+                                  >
+                                  <i class="fa-solid fa-trash-can"></i>
+                                  </button>
                                   <span style="float: right">{{
                                     comment.created_at
                                       | moment("YYYY-MM-DD HH:mm:ss")
@@ -179,8 +179,10 @@ export default {
       valid: false,
       recentMovieComment: "",
       model: null,
+      userId: null,
       rating: 3,
       movie_comment: null,
+      pickedMovieId:null,
       nameRules: [(v) => v.length <= 50 || "댓글은 50자 이내로 작성해주세요!"],
     };
   },
@@ -206,10 +208,11 @@ export default {
           url: `${API_URL}/api/v1/${pickedMovie.id}/moviecomment/`,
         }).then((res) => {
           this.movie_comment = res.data;
+          this.pickedMovieId = pickedMovie.id
+          this.userId = this.$store.state.loginUser.id;
         });
         this.recentMovieComment = "";
         this.rating = 3;
-        console.log("성공");
       });
     },
     getMovieComment(pickedMovie) {
@@ -218,8 +221,27 @@ export default {
         url: `${API_URL}/api/v1/${pickedMovie.id}/moviecomment/`,
       }).then((res) => {
         this.movie_comment = res.data;
+        this.pickedMovieId = pickedMovie.id
+        this.userId = this.$store.state.loginUser.id;
       });
     },
+    deleteComment(pickedComment) {
+      axios({
+        method: "delete",
+        url: `${API_URL}/api/v1/${pickedComment}/del/`,
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+        },
+      })
+      .then(() => {
+        axios({
+          method: "get",
+          url: `${API_URL}/api/v1/${this.pickedMovieId}/moviecomment/`,
+        }).then((res) => {
+          this.movie_comment = res.data;
+      })})
+
+    }
   },
 };
 </script>

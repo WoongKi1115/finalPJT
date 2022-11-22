@@ -32,6 +32,12 @@ def get_moviecommment_list(request, movie_pk):
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user, movie=movie)
             return Response(serializer.data)
+
 @api_view(['DELETE'])
 def moviecomment_delete(request, moviecomment_pk):
-    moviecomment = get_object_or_404(Rating, pk=comment_pk)
+    moviecomment = get_object_or_404(Rating, pk=moviecomment_pk)
+    if not request.user.is_authenticated:
+        return Response({"message": "no auth"}, status=status.HTTP_401_UNAUTHORIZED)
+    else:
+        moviecomment.delete()
+        return Response({'id':moviecomment_pk})
