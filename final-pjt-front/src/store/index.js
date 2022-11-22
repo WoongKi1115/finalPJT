@@ -11,6 +11,7 @@ export default new Vuex.Store({
     top10Movie: null,
     recenteMovie: null,
     classifiedMovie:null,
+    loginUser: null
   },
   getters: {
   },

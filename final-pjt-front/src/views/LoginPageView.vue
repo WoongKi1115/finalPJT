@@ -59,6 +59,7 @@ export default {
         localStorage.setItem("jwt", res.data.access);
         this.$emit("login");
         this.$router.push({ name: "mainpage" });
+        this.$router.go()
       })
         .catch(() => alert('틀렸어!'))
     },
