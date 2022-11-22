@@ -152,7 +152,7 @@ export default {
 }
 .modalimage {
   width: 600px;
-  height: 840px;
+  height: 810px;
   border-radius: 10px;
   object-fit: fit;
   display: block;

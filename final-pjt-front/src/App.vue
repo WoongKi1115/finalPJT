@@ -23,7 +23,7 @@
           v-show="!this.isLoggedIn"
           >Login</router-link
         >
-        <button v-show="this.isLoggedIn" @click="logOut" style="text-decoration:none; color:white;">Loggout</button>
+        <button v-show="this.isLoggedIn" @click="logOut" style="text-decoration:none; color:white">Loggout</button>
         <router-link  v-show="!this.isLoggedIn" style="text-decoration:none" :to="{ name: 'signup' }" class="white--text mx-3"
           >Signup</router-link
         >

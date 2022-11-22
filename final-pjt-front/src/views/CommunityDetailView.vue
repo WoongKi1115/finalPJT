@@ -142,7 +142,8 @@ export default {
 </script>
 
 <style>
-.detailpage {
+
+.detailpage{
   width: 80%;
   margin: auto;
   margin-top: 90px;
