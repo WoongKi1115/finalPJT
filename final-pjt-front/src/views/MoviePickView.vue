@@ -285,6 +285,7 @@
                       'https://image.tmdb.org/t/p/original' +
                       rcdMovie.poster_path
                     "
+                    @click="getMovieComment(rcdMovie)"
                   >
                   </v-img>
                 </template>
@@ -320,13 +321,17 @@
                                   {{ genre }}&nbsp;&nbsp;&nbsp;
                                 </span>
                               </div>
-                              <span>평점 : <star-rating
-                                        :increment="0.01"
-                                        :rating="averageStar"
-                                        :read-only="true"
-                                        :show-rating="false"
-                                        :star-size="20"
-                                      ></star-rating>{{ averageRate }}</span>
+                              <span
+                                >평점 :
+                                <star-rating
+                                  :increment="0.01"
+                                  :rating="averageStar"
+                                  :read-only="true"
+                                  :show-rating="false"
+                                  :star-size="20"
+                                ></star-rating
+                                >{{ averageRate }}</span
+                              >
                               <span>개봉일 : {{ rcdMovie.release_date }}</span>
                             </div>
                             <br />
@@ -393,47 +398,57 @@
                               </v-btn>
                             </div>
                             <v-list-item two-line>
-                              <v-list-item-content
-                                style="color: #eeeeee"
-                              >
+                              <v-list-item-content style="color: #eeeeee">
                                 <v-list-item-title
                                   class="mt-2"
-                                  style="display:float"
+                                  style="display: float"
                                   v-for="(comment, index) in calData"
                                   :key="index"
                                 >
-                                <div>
-                                  <div style="font-size: large; float:left; width:5%" class="me-10"
-                                    >{{ comment.username }}&nbsp;&nbsp;</div
-                                  >
-                                  <div style="float:left; width:20%">
-                                  <star-rating
-                                    :rating="comment.rates"
-                                    :read-only="true"
-                                    :show-rating="false"
-                                    :star-size="20"
-                                  ></star-rating>
+                                  <div>
+                                    <div
+                                      style="
+                                        font-size: large;
+                                        float: left;
+                                        width: 5%;
+                                      "
+                                      class="me-10"
+                                    >
+                                      {{ comment.username }}&nbsp;&nbsp;
+                                    </div>
+                                    <div style="float: left; width: 20%">
+                                      <star-rating
+                                        :rating="comment.rates"
+                                        :read-only="true"
+                                        :show-rating="false"
+                                        :star-size="20"
+                                      ></star-rating>
+                                    </div>
+                                    <div
+                                      style="float: left; width: 45%"
+                                      class="mt-1"
+                                    >
+                                      {{
+                                        comment.movie_comment
+                                      }}&nbsp;&nbsp;&nbsp;&nbsp;
+                                      <button
+                                        v-show="comment.user === userId"
+                                        @click="deleteComment(comment.id)"
+                                      >
+                                        <i class="fa-solid fa-trash-can"></i>
+                                      </button>
+                                    </div>
+                                    <div
+                                      style="float: left; width: 15%"
+                                      class="mt-1"
+                                    >
+                                      {{
+                                        comment.created_at
+                                          | moment("YYYY-MM-DD HH:mm:ss")
+                                      }}
+                                    </div>
                                   </div>
-                                  <div
-                                   style="float:left; width:45%"
-                                   class="mt-1"
-                                    >{{
-                                      comment.movie_comment
-                                    }}&nbsp;&nbsp;&nbsp;&nbsp;
-                                  <button
-                                    v-show="comment.user === userId"
-                                    @click="deleteComment(comment.id)"
-                                  >
-                                    <i class="fa-solid fa-trash-can"></i>
-                                  </button>
-                                  </div
-                                  >
-                                  <div style="float:left; width:15%" class="mt-1">{{
-                                    comment.created_at
-                                      | moment("YYYY-MM-DD HH:mm:ss")
-                                  }}</div>
-                                  </div>
-                                  <br>
+                                  <br />
                                   <v-divider class="mt-2" dark></v-divider>
                                 </v-list-item-title>
                                 <div class="text-center">
@@ -469,18 +484,18 @@ export default {
   name: "MoviePickView",
   methods: {
     getAvg() {
-      let summ = 0
+      let summ = 0;
       for (const rate in this.movie_comment) {
-        summ += (this.movie_comment[rate].rates)*2
+        summ += this.movie_comment[rate].rates * 2;
       }
-      let result = summ / this.movie_comment.length
+      let result = summ / this.movie_comment.length;
       if (this.movie_comment.length === 0) {
-        this.averageRate = 0
-        this.averageStar = 0
-        return
+        this.averageRate = 0;
+        this.averageStar = 0;
+        return;
       }
-      this.averageRate = result.toFixed(1) * 1
-      this.averageStar = result.toFixed(1) /2 * 1
+      this.averageRate = result.toFixed(1) * 1;
+      this.averageStar = (result.toFixed(1) / 2) * 1;
     },
     createMovieComment(pickedMovie) {
       const rates = this.rating;
@@ -496,19 +511,24 @@ export default {
         headers: {
           Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
         },
-      }).then(() => {
-        axios({
-          method: "get",
-          url: `${API_URL}/api/v1/${pickedMovie.id}/moviecomment/`,
-        }).then((res) => {
-          this.movie_comment = res.data;
-          this.pickedMovieId = pickedMovie.id;
-          this.userId = this.$store.state.loginUser.id;
-          this.getAvg()
+      })
+        .then(() => {
+          axios({
+            method: "get",
+            url: `${API_URL}/api/v1/${pickedMovie.id}/moviecomment/`,
+          }).then((res) => {
+            this.movie_comment = res.data;
+            this.pickedMovieId = pickedMovie.id;
+            this.userId = this.$store.state.loginUser.id;
+            this.getAvg();
+          });
+          this.recentMovieComment = "";
+          this.rating = 3;
+        })
+        .catch(() => {
+          alert("로그인해!");
+          this.$router.push("login");
         });
-        this.recentMovieComment = "";
-        this.rating = 3;
-      });
     },
     getMovieComment(pickedMovie) {
       axios({
@@ -518,7 +538,7 @@ export default {
         this.movie_comment = res.data;
         this.pickedMovieId = pickedMovie.id;
         this.userId = this.$store.state.loginUser.id;
-        this.getAvg()
+        this.getAvg();
       });
     },
     deleteComment(pickedComment) {
@@ -534,7 +554,7 @@ export default {
           url: `${API_URL}/api/v1/${this.pickedMovieId}/moviecomment/`,
         }).then((res) => {
           this.movie_comment = res.data;
-          this.getAvg()
+          this.getAvg();
         });
       });
     },
@@ -623,24 +643,24 @@ export default {
       return this.$store.state.classifiedMovie;
     },
     startOffset() {
-        return ((this.curPageNum - 1) * this.dataPerPage);
+      return (this.curPageNum - 1) * this.dataPerPage;
     },
     endOffset() {
-        return (this.startOffset + this.dataPerPage);
-    },  
-    numOfPages() {
-        return Math.ceil(this.movie_comment.length / this.dataPerPage);
+      return this.startOffset + this.dataPerPage;
     },
-      calData() {
-        return this.movie_comment.slice(this.startOffset, this.endOffset)
-    }
+    numOfPages() {
+      return Math.ceil(this.movie_comment.length / this.dataPerPage);
+    },
+    calData() {
+      return this.movie_comment.slice(this.startOffset, this.endOffset);
+    },
   },
   data() {
     return {
       dataPerPage: 5,
       curPageNum: 1,
-      averageRate:null,
-      averageStar:null,
+      averageRate: null,
+      averageStar: null,
       valid: false,
       recentMovieComment: "",
       model: null,
