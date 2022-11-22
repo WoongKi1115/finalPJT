@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.conf import settings
+from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
 
 
@@ -23,7 +24,12 @@ class Movie(models.Model):
     vote_count = models.FloatField()
 
 
-# class Rating(models.Model):
-#     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='ratings')
-#     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='ratings')
-#     rates = models.PositiveIntegerField(default=10, validators=[MinValueValidator(0.5), MaxValueValidator(5)])
+class Rating(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE, related_name='ratings')
+    movie = models.ForeignKey(
+        Movie, on_delete=models.CASCADE, related_name='ratings')
+    rates = models.PositiveIntegerField(
+        default=3, validators=[MinValueValidator(0.5), MaxValueValidator(5)])
+    movie_comment = models.CharField(max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True)
