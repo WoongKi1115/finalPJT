@@ -6,21 +6,23 @@
       style="float:right"
       class=""
       fab
-      dark
       x-small
       color="gray"
       @click="goCommunity"
     >
     X
     </v-btn>
-      <h1 style="color:black">Create</h1>
+      <h1>Create</h1>
     <div>
       <form>
     <v-text-field
+      dark
       v-model="title"
       label="Title"
     ></v-text-field>
     <v-textarea
+          dark
+          style="background-color:#222222"
           solo
           v-model="content"
           label="content"
@@ -85,7 +87,7 @@
       margin-top: 90px;
       border-radius: 20px;
       padding: 30px;
-      background-color: azure;
-      color: black;
+      background-color: #222222;
+      color: white;
     }
   </style>
