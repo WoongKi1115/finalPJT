@@ -1,4 +1,7 @@
 <template>
+  <v-row>
+    <v-col cols="2"></v-col>
+    <v-col cols="8">
   <div class="detailpage">
     <v-btn
       style="float: right"
@@ -29,23 +32,31 @@
     </div>
     <div class="comment">
       <v-text-field
+        
         label="댓글작성"
         v-model="inputComment"
-        style="background-color: white"
+        style="background-color: azure; width: 95%; margin: auto;"
         @keyup.enter="createComment"
       ></v-text-field>
     </div>
     <v-list-item two-line>
       <v-list-item-content style="text-align: left">
         <v-list-item-title
+        class="mt-2"
           v-for="(comment, index) in this.comments"
           :key="index"
-          >{{ comment.content }}
-          <v-btn v-show="comment.user === userId" @click="deleteComment(comment.id)">여긴어디</v-btn>
+          >
+          <span style="font-size:large" class="me-10">{{comment.username}}&nbsp;&nbsp;</span> <span>{{ comment.content }}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <button v-show="comment.user === userId" @click="deleteComment(comment.id)"><i class="fa-solid fa-trash-can"></i></button>
+          <span style="float: right;">{{comment.created_at  | moment("YYYY-MM-DD HH:mm:ss") }}</span>
+          <v-divider class="mt-2"></v-divider>
         </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
   </div>
+</v-col>
+  <v-col cols="2"></v-col>
+</v-row>
 </template>
 
 <script>
@@ -144,7 +155,6 @@ export default {
 <style>
 
 .detailpage{
-  width: 80%;
   margin: auto;
   margin-top: 90px;
   border-radius: 20px;
