@@ -266,6 +266,10 @@ export default {
           url: `${API_URL}/api/v1/${this.pickedMovieId}/moviecomment/`,
         }).then((res) => {
           this.movie_comment = res.data;
+          this.startOffset=((this.curPageNum - 1) * this.dataPerPage);
+          this.endOffset= (this.startOffset + this.dataPerPage);
+          this.numOfPages = Math.ceil(this.movie_comment.length / this.dataPerPage);
+          this.calData= this.movie_comment.slice(this.startOffset, this.endOffset)
         });
       });
     },
