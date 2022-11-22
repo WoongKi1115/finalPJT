@@ -381,13 +381,12 @@ export default {
       for (let pickedMood of this.pickedMoods) {
         this.moodsCount[pickedMood] += 1;
       }
-      console.log(this.moodsCount);
       for (let id in this.moodsCount) {
         let count = this.moodsCount[id];
         if (count) {
           let i = 0;
           const recommendedMovie = _.cloneDeep(this.classifyMovie[id]);
-          while (i < count) {
+          while (i < count*2) {
             const randomMovie = _.sample(recommendedMovie);
             if (!this.recommendMovieId.includes(randomMovie.id)) {
               this.recommendMovie.push(randomMovie);
@@ -399,7 +398,6 @@ export default {
       }
       this.getGenre();
       this.dialog = false;
-      console.log(this.recommendMovie);
     },
     getGenre() {
       // const movieListLen= movies.length
