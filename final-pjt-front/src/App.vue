@@ -4,7 +4,7 @@
       <div class="d-flex align-center">
         <!-- 로고 들어갈 자리 -->
         <router-link :to="{ name: 'mainpage' }" class="white--text">
-          <img src="" alt="로고자리" />
+          <img style="width:60px" src="@/assets/1212.jpg" alt="로고자리" />
         </router-link>
       </div>
 
