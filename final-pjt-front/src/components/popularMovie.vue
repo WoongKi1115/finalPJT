@@ -84,8 +84,13 @@
                                   </div>
                                   <span
                                     >평점 :
-                                    {{ popularMovie.vote_average }}</span
-                                  >
+                                    <star-rating
+                                        :increment="0.01"
+                                        :rating="averageStar"
+                                        :read-only="true"
+                                        :show-rating="false"
+                                        :star-size="20"
+                                      ></star-rating>{{ averageRate }}</span>
                                   <span
                                     >개봉일 :
                                     {{ popularMovie.release_date }}</span
@@ -100,8 +105,6 @@
                               </div>
                               <div
                                 style="
-                                  border: 2px solid #e50914;
-                                  border-radius: 20px;
                                   height: 50%;
                                   width: 90%;
                                   background-color: #222222;
@@ -111,6 +114,10 @@
                                 "
                               >
                                 <div
+                                  style="
+                                    border: 2px solid #e50914;
+                                    border-radius: 20px;
+                                  "
                                   class="
                                     d-flex
                                     justify-content-around
@@ -127,13 +134,14 @@
                                     >
                                       ({{ rating }})
                                     </span>
-                                    <v-rating
-                                      half-increments
-                                      color="yellow"
-                                      bg-color="orange-lighten-1"
+                                    <star-rating
+                                      :increment="0.5"
                                       v-model="rating"
-                                      hover
-                                    ></v-rating>
+                                      :star-size="35"
+                                      :show-rating="false"
+                                      :glow="5"
+                                      :animate="true"
+                                    ></star-rating>
                                   </div>
                                   <v-text-field
                                     @keyup.enter="
@@ -148,42 +156,52 @@
                                     label="댓글"
                                     required
                                   ></v-text-field>
-                                </div>
-                                <v-list-item two-line>
-                                  <v-list-item-content
-                                    style="text-align: left; color: #eeeeee"
+                                  <v-btn
+                                    @click="createMovieComment(popularMovie)"
+                                    class="align-self-center"
                                   >
-                                    <v-list-item-title
-                                      class="mt-2"
-                                      v-for="(comment, index) in movie_comment"
-                                      :key="index"
-                                    >
-                                      <span
-                                        style="font-size: large"
-                                        class="me-10"
-                                        >{{
-                                          comment.username
-                                        }}&nbsp;&nbsp;</span
+                                    입력
+                                  </v-btn>
+                                </div>
+                                <v-simple-table height="300px" dark>
+                                  <template v-slot:default>
+                                    <tbody>
+                                      <tr
+                                        v-for="(
+                                          comment, index
+                                        ) in movie_comment"
+                                        :key="index"
                                       >
-                                      <span
-                                        >{{
-                                          comment.movie_comment
-                                        }}&nbsp;&nbsp;&nbsp;&nbsp;</span
-                                      >
-                                      <button
-                                        v-show="comment.user === userId"
-                                        @click="deleteComment(comment.id)"
-                                      >
-                                        <i class="fa-solid fa-trash-can"></i>
-                                      </button>
-                                      <span style="float: right">{{
-                                        comment.created_at
-                                          | moment("YYYY-MM-DD HH:mm:ss")
-                                      }}</span>
-                                      <v-divider class="mt-2"></v-divider>
-                                    </v-list-item-title>
-                                  </v-list-item-content>
-                                </v-list-item>
+                                        <td>{{ comment.username }}</td>
+                                        <td>
+                                          <star-rating
+                                            :rating="comment.rates"
+                                            :read-only="true"
+                                            :show-rating="false"
+                                            :star-size="20"
+                                          ></star-rating>
+                                        </td>
+                                        <td>{{ comment.movie_comment }}</td>
+                                        <td>
+                                          {{
+                                            comment.created_at
+                                              | moment("YYYY-MM-DD HH:mm:ss")
+                                          }}
+                                        </td>
+                                        <td>
+                                          <button
+                                            v-show="comment.user === userId"
+                                            @click="deleteComment(comment.id)"
+                                          >
+                                            <i
+                                              class="fa-solid fa-trash-can"
+                                            ></i>
+                                          </button>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </template>
+                                </v-simple-table>
                               </div>
                             </div>
                           </v-col>
@@ -204,6 +222,7 @@
 </template>
 
 <script>
+import StarRating from "vue-star-rating";
 // import popularMovieitem from '@/components/popularMovieitem';
 import axios from "axios";
 const API_URL = "http://127.0.0.1:8000";
@@ -222,9 +241,12 @@ export default {
       pickedMovieId: null,
       isLoggedIn: false,
       nameRules: [(v) => v.length <= 50 || "댓글은 50자 이내로 작성해주세요!"],
+      averageRate:null,
+      averageStar:null,
     };
   },
   components: {
+    StarRating,
     // popularMovieitem
   },
   computed: {
@@ -233,6 +255,20 @@ export default {
     },
   },
   methods: {
+    getAvg() {
+      let summ = 0
+      for (const rate in this.movie_comment) {
+        summ += (this.movie_comment[rate].rates)*2
+      }
+      let result = summ / this.movie_comment.length
+      if (this.movie_comment.length === 0) {
+        this.averageRate = 0
+        this.averageStar = 0
+        return
+      } 
+      this.averageRate = result.toFixed(1) * 1
+      this.averageStar = result.toFixed(1) /2 * 1
+    },
     openModal() {
       this.showModal = false;
     },
@@ -242,6 +278,10 @@ export default {
     createMovieComment(pickedMovie) {
       const rates = this.rating;
       const movie_comment = this.popularMovieComment;
+      if (movie_comment == "") {
+        alert("글을 입력하세요");
+        return;
+      }
       axios({
         method: "post",
         url: `${API_URL}/api/v1/${pickedMovie.id}/moviecomment/`,
@@ -249,22 +289,24 @@ export default {
         headers: {
           Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
         },
-      }).then(() => {
-        axios({
-          method: "get",
-          url: `${API_URL}/api/v1/${pickedMovie.id}/moviecomment/`,
-        }).then((res) => {
-          this.movie_comment = res.data;
-          this.pickedMovieId = pickedMovie.id;
-          this.userId = this.$store.state.loginUser.id;
-        });
-        this.popularMovieComment = "";
-        this.rating = 3;
-      }).catch(() =>{
-        alert('로그인해!')
-        this.$router.push("login");
-
       })
+        .then(() => {
+          axios({
+            method: "get",
+            url: `${API_URL}/api/v1/${pickedMovie.id}/moviecomment/`,
+          }).then((res) => {
+            this.movie_comment = res.data;
+            this.pickedMovieId = pickedMovie.id;
+            this.userId = this.$store.state.loginUser.id;
+            this.getAvg()
+          });
+          this.popularMovieComment = "";
+          this.rating = 3;
+        })
+        .catch(() => {
+          alert("로그인해!");
+          this.$router.push("login");
+        });
     },
     getMovieComment(pickedMovie) {
       this.popularMovieComment = "";
@@ -276,6 +318,7 @@ export default {
         this.movie_comment = res.data;
         this.pickedMovieId = pickedMovie.id;
         this.userId = this.$store.state.loginUser.id;
+        this.getAvg()
       });
     },
     deleteComment(pickedComment) {
@@ -291,6 +334,7 @@ export default {
           url: `${API_URL}/api/v1/${this.pickedMovieId}/moviecomment/`,
         }).then((res) => {
           this.movie_comment = res.data;
+          this.getAvg()
         });
       });
     },

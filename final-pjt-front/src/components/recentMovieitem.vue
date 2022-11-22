@@ -64,7 +64,13 @@
                                   {{ genre }}&nbsp;&nbsp;&nbsp;
                                 </span>
                               </div>
-                              <span>평점 : {{ recentmovie.vote_average }}</span>
+                              <span>평점 : <star-rating
+                                        :increment="0.01"
+                                        :rating="averageStar"
+                                        :read-only="true"
+                                        :show-rating="false"
+                                        :star-size="20"
+                                      ></star-rating>{{ averageRate }}</span>
                               <span
                                 >개봉일 : {{ recentmovie.release_date }}</span
                               >
@@ -78,8 +84,6 @@
                           </div>
                           <div
                             style="
-                              border: 2px solid #e50914;
-                              border-radius: 20px;
                               height: 50%;
                               width: 90%;
                               background-color: #222222;
@@ -89,7 +93,16 @@
                             "
                           >
                             <div
-                              class="d-flex justify-content-around mt-1 pa-5 pb-5 pt-0"
+                              style="border: 2px solid #e50914;
+                              border-radius: 20px;"
+                              class="
+                                d-flex
+                                justify-content-around
+                                mt-1
+                                pa-5
+                                pb-5
+                                pt-0
+                              "
                             >
                               <div class="text-center mb-3">
                                 <span
@@ -118,50 +131,46 @@
                                 label="댓글"
                                 required
                               ></v-text-field>
+                              <v-btn @click="createMovieComment(recentmovie)" class="align-self-center"> 입력 </v-btn>
                             </div>
-                            <v-list-item two-line>
-                              <v-list-item-content
-                                style="text-align: left; color: #eeeeee"
-                              >
-                                <v-list-item-title
-                                  class="mt-2"
-                                  v-for="(comment, index) in calData"
-                                  :key="index"
-                                >
-                                  <span style="font-size: large" class="me-10"
-                                    >{{ comment.username }}&nbsp;&nbsp;</span
+                            <v-simple-table
+                              height="300px"
+                              dark
+                            >
+                              <template v-slot:default>
+                                <tbody>
+                                  <tr
+                                    v-for="(comment, index) in movie_comment"
+                                    :key="index"
                                   >
-                                  <star-rating
-                                    :rating="comment.rates"
-                                    :read-only="true"
-                                    :show-rating="false"
-                                    :star-size="20"
-                                  ></star-rating>
-                                  <span
-                                    >{{
-                                      comment.movie_comment
-                                    }}&nbsp;&nbsp;&nbsp;&nbsp;</span
-                                  >
-                                  <button
-                                    v-show="comment.user === userId"
-                                    @click="deleteComment(comment.id)"
-                                  >
-                                    <i class="fa-solid fa-trash-can"></i>
-                                  </button>
-                                  <span style="float: right">{{
-                                    comment.created_at
-                                      | moment("YYYY-MM-DD HH:mm:ss")
-                                  }}</span>
-                                  <v-divider class="mt-2"></v-divider>
-                                </v-list-item-title>
-                                <div class="text-center">
-                                  <v-pagination
-                                    v-model="curPageNum"
-                                    :length="numOfPages"
-                                  ></v-pagination>
-                                </div>
-                              </v-list-item-content>
-                            </v-list-item>
+                                    <td>{{ comment.username }}</td>
+                                    <td>
+                                      <star-rating
+                                        :rating="comment.rates"
+                                        :read-only="true"
+                                        :show-rating="false"
+                                        :star-size="20"
+                                      ></star-rating>
+                                    </td>
+                                    <td>{{ comment.movie_comment }}</td>
+                                    <td>
+                                      {{
+                                        comment.created_at
+                                          | moment("YYYY-MM-DD HH:mm:ss")
+                                      }}
+                                    </td>
+                                    <td>
+                                      <button
+                                        v-show="comment.user === userId"
+                                        @click="deleteComment(comment.id)"
+                                      >
+                                        <i class="fa-solid fa-trash-can"></i>
+                                      </button>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </template>
+                            </v-simple-table>
                           </div>
                         </div>
                       </v-col>
@@ -188,8 +197,6 @@ export default {
   },
   data() {
     return {
-      dataPerPage: 3,
-      curPageNum: 1,
       valid: false,
       recentMovieComment: "",
       model: null,
@@ -198,11 +205,8 @@ export default {
       movie_comment: null,
       pickedMovieId: null,
       nameRules: [(v) => v.length <= 50 || "댓글은 50자 이내로 작성해주세요!"],
-      // 아래 4개가 번호에 대한 변수
-      startOffset:null,
-      endOffset:null,
-      numOfPages:null,
-      calData:null
+      averageRate:null,
+      averageStar:null,
     };
   },
   computed: {
@@ -211,9 +215,27 @@ export default {
     },
   },
   methods: {
+    getAvg() {
+      let summ = 0
+      for (const rate in this.movie_comment) {
+        summ += (this.movie_comment[rate].rates)*2
+      }
+      let result = summ / this.movie_comment.length
+      if (this.movie_comment.length === 0) {
+        this.averageRate = 0
+        this.averageStar = 0
+        return
+      }
+      this.averageRate = result.toFixed(1) * 1
+      this.averageStar = result.toFixed(1) /2 * 1
+    },
     createMovieComment(pickedMovie) {
       const rates = this.rating;
       const movie_comment = this.recentMovieComment;
+      if (movie_comment == '') {
+        alert ('글을 입력하세요')
+        return
+      }
       axios({
         method: "post",
         url: `${API_URL}/api/v1/${pickedMovie.id}/moviecomment/`,
@@ -229,10 +251,7 @@ export default {
           this.movie_comment = res.data;
           this.pickedMovieId = pickedMovie.id;
           this.userId = this.$store.state.loginUser.id;
-          this.startOffset=((this.curPageNum - 1) * this.dataPerPage);
-          this.endOffset= (this.startOffset + this.dataPerPage);
-          this.numOfPages = Math.ceil(this.movie_comment.length / this.dataPerPage);
-          this.calData= this.movie_comment.slice(this.startOffset, this.endOffset)
+          this.getAvg()
         });
         this.recentMovieComment = "";
         this.rating = 3;
@@ -242,15 +261,11 @@ export default {
       axios({
         method: "get",
         url: `${API_URL}/api/v1/${pickedMovie.id}/moviecomment/`,
-      })
-      .then((res) => {
+      }).then((res) => {
         this.movie_comment = res.data;
         this.pickedMovieId = pickedMovie.id;
         this.userId = this.$store.state.loginUser.id;
-        this.startOffset=((this.curPageNum - 1) * this.dataPerPage);
-        this.endOffset= (this.startOffset + this.dataPerPage);
-        this.numOfPages = Math.ceil(this.movie_comment.length / this.dataPerPage);
-        this.calData= this.movie_comment.slice(this.startOffset, this.endOffset)
+        this.getAvg()
       });
     },
     deleteComment(pickedComment) {
@@ -266,10 +281,7 @@ export default {
           url: `${API_URL}/api/v1/${this.pickedMovieId}/moviecomment/`,
         }).then((res) => {
           this.movie_comment = res.data;
-          this.startOffset=((this.curPageNum - 1) * this.dataPerPage);
-          this.endOffset= (this.startOffset + this.dataPerPage);
-          this.numOfPages = Math.ceil(this.movie_comment.length / this.dataPerPage);
-          this.calData= this.movie_comment.slice(this.startOffset, this.endOffset)
+          this.getAvg()
         });
       });
     },
