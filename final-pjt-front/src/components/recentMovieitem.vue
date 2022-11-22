@@ -44,7 +44,7 @@
                       </v-col>
                       <v-col cols="7" class="pa-0" style="color: #eeeeee">
                         <div style="position: relative" class="pe-10">
-                          <div style="position: relative; top: 20px">
+                          <div style="position: relative; top: 20px; width:90%">
                             <h1>{{ recentmovie.title }}</h1>
                             <br />
                             <br />
@@ -75,24 +75,36 @@
                           </div>
                           <div
                             style="
-                              border: 2px solid #E50914;
+                              border: 2px solid #e50914;
                               border-radius: 20px;
-                              height: 450px;
-                              width: 990px;
-                              background-color:#222222;
+                              height: 50%;
+                              width: 90%;
+                              background-color: #222222;
                               color: black;
                               position: absolute;
                               top: 350px;
                             "
                           >
-                            <div class="d-flex justify-content-around mt-3">
-                              <div class="text-center">
-                                <v-rating v-model="rating" hover></v-rating>
+                            <div class="d-flex justify-content-around mt-1 pa-5 pb-5 pt-0">
+                              <div class="text-center mb-3">
+                                <span
+                                  class="text-caption mr-2" style="color:white"
+                                >
+                                  ({{ rating }})
+                                </span>
+                                <v-rating
+                                  half-increments
+                                  color="yellow"
+                                  bg-color="orange-lighten-1"
+                                  v-model="rating"
+                                  hover
+                                ></v-rating>
                               </div>
                               <v-text-field
+                                @keyup.enter="movieComment"
                                 dark
                                 class="pa-3"
-                                style="background-color:#222222"
+                                style="background-color: #222222"
                                 v-model="recentMovieComment"
                                 :rules="nameRules"
                                 :counter="50"
@@ -121,12 +133,10 @@ export default {
   data() {
     return {
       valid: false,
-      recentMovieComment: '',
+      recentMovieComment: "",
       model: null,
       rating: 3,
-      nameRules: [
-        v => v.length <= 50 || '댓글은 50자 이내로 작성해주세요!',
-      ],
+      nameRules: [(v) => v.length <= 50 || "댓글은 50자 이내로 작성해주세요!"],
     };
   },
   computed: {
@@ -134,6 +144,11 @@ export default {
       return this.$store.state.recenteMovie;
     },
   },
+  methods:{
+    movieComment() {
+      console.log('성공')
+    }
+  }
 };
 </script>
 

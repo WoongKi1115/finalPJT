@@ -14,7 +14,7 @@
           >Community</router-link
         >
         <router-link style="text-decoration:none" :to="{ name: 'moviepick' }" class="white--text mx-3"
-          >추천</router-link
+          >Recommend</router-link
         >
         <router-link
         style="text-decoration:none"
