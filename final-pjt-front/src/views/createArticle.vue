@@ -18,14 +18,15 @@
     <v-text-field
       dark
       v-model="title"
+      
       label="Title"
     ></v-text-field>
     <v-textarea
           dark
-          style="background-color:#222222"
+          background-color="#222222"
           solo
           v-model="content"
-          label="content"
+          label="Content"
         ></v-textarea>
     <v-btn
       class="mr-4"
@@ -87,7 +88,7 @@
       margin-top: 90px;
       border-radius: 20px;
       padding: 30px;
-      background-color: #222222;
+      background-color: #323232;
       color: white;
     }
   </style>
