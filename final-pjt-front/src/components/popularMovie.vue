@@ -163,45 +163,58 @@
                                     입력
                                   </v-btn>
                                 </div>
-                                <v-simple-table height="300px" dark>
-                                  <template v-slot:default>
-                                    <tbody>
-                                      <tr
-                                        v-for="(
-                                          comment, index
-                                        ) in movie_comment"
-                                        :key="index"
-                                      >
-                                        <td>{{ comment.username }}</td>
-                                        <td>
-                                          <star-rating
-                                            :rating="comment.rates"
-                                            :read-only="true"
-                                            :show-rating="false"
-                                            :star-size="20"
-                                          ></star-rating>
-                                        </td>
-                                        <td>{{ comment.movie_comment }}</td>
-                                        <td>
-                                          {{
-                                            comment.created_at
-                                              | moment("YYYY-MM-DD HH:mm:ss")
-                                          }}
-                                        </td>
-                                        <td>
-                                          <button
-                                            v-show="comment.user === userId"
-                                            @click="deleteComment(comment.id)"
-                                          >
-                                            <i
-                                              class="fa-solid fa-trash-can"
-                                            ></i>
-                                          </button>
-                                        </td>
-                                      </tr>
-                                    </tbody>
-                                  </template>
-                                </v-simple-table>
+                                <v-list-item two-line>
+                              <v-list-item-content
+                                style="color: #eeeeee"
+                              >
+                                <v-list-item-title
+                                  class="mt-2"
+                                  style="display:float"
+                                  v-for="(comment, index) in calData"
+                                  :key="index"
+                                >
+                                <div>
+                                  <div style="font-size: large; float:left; width:5%" class="me-10"
+                                    >{{ comment.username }}&nbsp;&nbsp;</div
+                                  >
+                                  <div style="float:left; width:20%">
+                                  <star-rating
+                                    :rating="comment.rates"
+                                    :read-only="true"
+                                    :show-rating="false"
+                                    :star-size="20"
+                                  ></star-rating>
+                                  </div>
+                                  <div
+                                   style="float:left; width:45%"
+                                   class="mt-1"
+                                    >{{
+                                      comment.movie_comment
+                                    }}&nbsp;&nbsp;&nbsp;&nbsp;
+                                  <button
+                                    v-show="comment.user === userId"
+                                    @click="deleteComment(comment.id)"
+                                  >
+                                    <i class="fa-solid fa-trash-can"></i>
+                                  </button>
+                                  </div
+                                  >
+                                  <div style="float:left; width:15%" class="mt-1">{{
+                                    comment.created_at
+                                      | moment("YYYY-MM-DD HH:mm:ss")
+                                  }}</div>
+                                  </div>
+                                  <br>
+                                  <v-divider class="mt-2" dark></v-divider>
+                                </v-list-item-title>
+                                <div class="text-center">
+                                  <v-pagination
+                                    v-model="curPageNum"
+                                    :length="numOfPages"
+                                  ></v-pagination>
+                                </div>
+                              </v-list-item-content>
+                            </v-list-item>
                               </div>
                             </div>
                           </v-col>
@@ -230,6 +243,8 @@ export default {
   name: "popularMovie",
   data() {
     return {
+      dataPerPage: 5,
+      curPageNum: 1,
       isModalviewed: false,
       showModal: true,
       valid: false,
@@ -237,7 +252,7 @@ export default {
       model: null,
       userId: null,
       rating: 3,
-      movie_comment: null,
+      movie_comment: [],
       pickedMovieId: null,
       isLoggedIn: false,
       nameRules: [(v) => v.length <= 50 || "댓글은 50자 이내로 작성해주세요!"],
@@ -253,6 +268,18 @@ export default {
     popularMovies() {
       return this.$store.state.top10Movie;
     },
+     startOffset() {
+        return ((this.curPageNum - 1) * this.dataPerPage);
+      },
+      endOffset() {
+        return (this.startOffset + this.dataPerPage);
+      },
+      numOfPages() {
+        return Math.ceil(this.movie_comment.length / this.dataPerPage);
+      },
+      calData() {
+        return this.movie_comment.slice(this.startOffset, this.endOffset)
+      }
   },
   methods: {
     getAvg() {

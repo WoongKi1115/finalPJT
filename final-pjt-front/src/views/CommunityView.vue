@@ -1,3 +1,34 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Codespaces
+Marketplace
+Explore
+ 
+@WoongKi1115 
+WoongKi1115
+/
+finalPJT
+Public
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+finalPJT/final-pjt-front/src/views/CommunityView.vue
+@WoongKi1115
+WoongKi1115 update
+Latest commit f02a0e1 16 hours ago
+ History
+ 2 contributors
+@WoongKi1115@moooonam
+124 lines (119 sloc)  2.56 KB
+
 <template>
   <div class="communitypage">
     <h1>Community</h1>
@@ -21,11 +52,15 @@
         </div>
         <div >
         <communityItem
-          v-for="article in articles"
+          v-for="article in calData"
           :key="article.id"
           :article="article"
           class="board_list_body1"
         />
+         <v-pagination
+        v-model="curPageNum"
+        :length="numOfPages">
+      </v-pagination>
         </div>
       </div>
     </div>
@@ -40,13 +75,27 @@ export default {
   name: "CommunityView",
   data() {
     return {
-
+      articles:[],
+      dataPerPage: 8,
+      curPageNum: 1,
     };
   },
   computed: {
-    articles() {
-      return this.$store.state.articles;
-    },    
+    // articles() {
+    //   return this.$store.state.articles;
+    // },
+    startOffset() {
+        return ((this.curPageNum - 1) * this.dataPerPage);
+      },
+      endOffset() {
+        return (this.startOffset + this.dataPerPage);
+      },
+      numOfPages() {
+        return Math.ceil(this.articles.length / this.dataPerPage);
+      },
+      calData() {
+        return this.articles.slice(this.startOffset, this.endOffset)
+      }    
   },
   components: {
     communityItem,
@@ -58,7 +107,8 @@ export default {
         url: `${API_URL}/community/`,
       })
         .then((res) => {
-          this.$store.state.articles = res.data;
+          // this.$store.state.articles = res.data;
+          this.articles = res.data
         })
         .catch((err) => {
           console.log(err);
@@ -88,8 +138,6 @@ export default {
 </script>
 
 <style>
-
-
 .board_list_wrap {
   padding: 50px;
 }
@@ -122,3 +170,18 @@ export default {
   width: 10%;
 }
 </style>
+Footer
+© 2022 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+finalPJT/CommunityView.vue at main · WoongKi1115/finalPJT
