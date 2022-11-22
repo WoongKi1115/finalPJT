@@ -7,7 +7,6 @@
       style="float: right"
       class=""
       fab
-      dark
       x-small
       color="gray"
       @click="goCommunity"
@@ -23,24 +22,30 @@
       <div style="text-align: right; font-size: 14px">
         작성시간 : {{ article.created_at | moment("YYYY-MM-DD HH:mm:ss") }}
       </div>
-      <v-btn v-show="isYouers" @click="deleteArticle">
-        게시글 삭제하기</v-btn
+      <v-btn v-show="isYouers" color="" @click="deleteArticle" style="float:right">
+        글 삭제 </v-btn
       >
       <div style="text-align: left; font-size: 19px" class="mt-10 mb-15">
         내용 : {{ article?.content }}
       </div>
     </div>
-    <div class="comment">
-      <v-text-field
-        
+    <div class="d-flex justify-content-between">
+      <div class="comment" style="width:90%">
+        <v-text-field
+  
         label="댓글작성"
         v-model="inputComment"
-        style="background-color: azure; width: 95%; margin: auto;"
+        dark
+        style="background-color: #222222; width: 95%; margin: auto;"
         @keyup.enter="createComment"
-      ></v-text-field>
-    </div>
+        ></v-text-field>
+      </div>
+        <div>
+          <v-btn @click="createComment">입력</v-btn>
+        </div>
+  </div>
     <v-list-item two-line>
-      <v-list-item-content style="text-align: left">
+      <v-list-item-content style="text-align: left; color: white;">
         <v-list-item-title
         class="mt-2"
           v-for="(comment, index) in this.comments"
@@ -49,7 +54,7 @@
           <span style="font-size:large" class="me-10">{{comment.username}}&nbsp;&nbsp;</span> <span>{{ comment.content }}&nbsp;&nbsp;&nbsp;&nbsp;</span>
           <button v-show="comment.user === userId" @click="deleteComment(comment.id)"><i class="fa-solid fa-trash-can"></i></button>
           <span style="float: right;">{{comment.created_at  | moment("YYYY-MM-DD HH:mm:ss") }}</span>
-          <v-divider class="mt-2"></v-divider>
+          <v-divider class="mt-2" dark></v-divider>
         </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
@@ -159,7 +164,7 @@ export default {
   margin-top: 90px;
   border-radius: 20px;
   padding: 25px;
-  background-color: azure;
-  color: black;
+  background-color: #222222;
+  color: white;
 }
 </style>
