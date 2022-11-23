@@ -40,8 +40,8 @@
       </div>
     </v-app-bar>
 
-    <v-main class="v-mains">
-      <router-view @login="isLoggedIn = true" />
+    <v-main class="v-mains mt-5">
+      <router-view :key="$route.fullPath" @login="isLoggedIn = true" />
     </v-main>
   </v-app>
 </template>
@@ -190,7 +190,6 @@ export default {
     doSearch() {
       const keyword = this.searchKeyword
       this.$router.push({ name: "search", params: {keyword} });
-      console.log(keyword)
       this.searchKeyword = null
     },
 

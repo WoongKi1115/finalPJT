@@ -323,13 +323,13 @@ export default {
       for (let oneWord of serchKeywordList){
         for (let id in this.allMovies) {
           let movietitle = this.allMovies[id].title
+          let originTitle = this.allMovies[id].original_title.toLowerCase()
           // console.log(movietitle)
-          if (movietitle.includes(oneWord)){
+          if (movietitle.includes(oneWord) || originTitle.includes(oneWord.toLowerCase())){
             this.searchedMovieList.push(this.allMovies[id])
           }
       }
       }
-      console.log(this.searchedMovieList)
     }
 	},
   computed:{
