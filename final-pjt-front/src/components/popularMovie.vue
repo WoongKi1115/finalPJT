@@ -69,7 +69,7 @@
                                 <br />
                                 <br />
                                 <v-row>
-                                  <v-col cols="6" style="font-size: medium">
+                                  <v-col cols="9" style="font-size: medium">
                                     <div class="d-flex">
                                       <label for="genre">장르 : </label>
                                       <span
@@ -114,18 +114,11 @@
                                     >
                                   </v-col>
                                 </v-row>
-                                <br />
-                                <br />
-                                <label for="overview" style="font-size: medium; text-align: left"
-                              >줄거리 : </label>
-                                <span id="overview"
-                                style="
-                                font-size: medium;
-                                text-align: left;
-                                line-height: 180%;
-                              ">{{
-                                  popularMovie.overview
-                                }}</span>
+                            <v-card height="150" dark class="ms-6 mt-3 overview overflow-auto">
+                              <v-card-text  dark>
+                                {{ popularMovie.overview }}
+                              </v-card-text>
+                            </v-card>
                               </div>
                               <div
                                 style="

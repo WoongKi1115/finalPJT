@@ -1,14 +1,13 @@
 <template>
   <div>
-    <h1>{{randomGenre1}}</h1>
+    <h1>{{ randomGenre3 }}</h1>
     <v-sheet class="mx-auto" max-width="1800">
       <v-slide-group
         style="height: 550px"
         class="pa-4 recentmovie"
         active-class="success"
         show-arrows
-      >
-      <template v-slot:next>
+      ><template v-slot:next>
             <v-icon color="white" large>fa-light fa-chevron-right</v-icon>
           </template>
               <template v-slot:prev>
@@ -16,7 +15,7 @@
             </template>
         <v-slide-item
           class="mt-6"
-          v-for="(randomMovie1, index) in randomGenreMovies1"
+          v-for="(randomMovie3, index) in randomGenreMovies3"
           :key="index"
         >
           <v-card class="ma-4 pa-1 posterimg" height="450" width="300">
@@ -28,10 +27,10 @@
                     v-on="on"
                     :src="
                       'https://image.tmdb.org/t/p/original' +
-                      randomMovie1.poster_path
+                      randomMovie3.poster_path
                     "
                     height="440"
-                    @click="getMovieComment(randomMovie1)"
+                    @click="getMovieComment(randomMovie3)"
                   >
                   </v-img>
                 </template>
@@ -44,7 +43,7 @@
                           class="modalimage"
                           :src="
                             'https://image.tmdb.org/t/p/original' +
-                            randomMovie1.poster_path
+                            randomMovie3.poster_path
                           "
                         />
                       </v-col>
@@ -53,7 +52,7 @@
                           <div
                             style="position: relative; top: 20px; width: 90%"
                           >
-                            <h2>{{ randomMovie1.title }}</h2>
+                            <h2>{{ randomMovie3.title }}</h2>
                             <br />
                             <br />
                             <v-row>
@@ -64,17 +63,17 @@
                                     id="genre"
                                     v-for="(
                                       genre, index
-                                    ) in getGenre(randomMovie1)"
+                                    ) in getGenre(randomMovie3)"
                                     :key="index"
                                   >
                                     {{ genre }}&nbsp;&nbsp;&nbsp;
                                   </span>
                                 </div>
                                 <div class="d-flex my-2">
-                                  개봉일 : {{ randomMovie1.release_date }}
+                                  개봉일 : {{ randomMovie3.release_date }}
                                 </div>
                                 <div class="d-flex">
-                                  감독 : {{ randomMovie1.director }}
+                                  감독 : {{ randomMovie3.director }}
                                 </div>
                                 <div
                                   class="d-flex my-2"
@@ -82,7 +81,7 @@
                                 >
                                   주연 :
                                   {{
-                                    randomMovie1.actors
+                                    randomMovie3.actors
                                       .replace(/\[/g, "")
                                       .replace(/\]/g, "")
                                       .replace(/\'/g, "")
@@ -104,7 +103,7 @@
                             </v-row>
                             <v-card height="150" dark class="ms-6 mt-3 overview overflow-auto">
                               <v-card-text  dark>
-                                {{ randomMovie1.overview }}
+                                {{ randomMovie3.overview }}
                               </v-card-text>
                             </v-card>
                           </div>
@@ -123,7 +122,14 @@
                                 border: 2px solid #e50914;
                                 border-radius: 20px;
                               "
-                              class="d-flex justify-content-around mt-1 pa-5 pb-5 pt-0"
+                              class="
+                                d-flex
+                                justify-content-around
+                                mt-1
+                                pa-5
+                                pb-5
+                                pt-0
+                              "
                             >
                               <div class="text-center mb-3">
                                 <span
@@ -142,18 +148,18 @@
                                 ></star-rating>
                               </div>
                               <v-text-field
-                                @keyup.enter="createMovieComment(randomMovie1)"
+                                @keyup.enter="createMovieComment(randomMovie3)"
                                 dark
                                 class="pa-3"
                                 style="background-color: #222222"
-                                v-model="randomMovie1Comment"
+                                v-model="randomMovie3Comment"
                                 :rules="nameRules"
                                 :counter="50"
                                 label="댓글"
                                 required
                               ></v-text-field>
                               <v-btn
-                                @click="createMovieComment(randomMovie1)"
+                                @click="createMovieComment(randomMovie3)"
                                 class="align-self-center"
                               >
                                 입력
@@ -238,7 +244,6 @@
         </v-slide-item>
       </v-slide-group>
     </v-sheet>
-
   </div>
 </template>
 
@@ -249,7 +254,7 @@ const API_URL = "http://127.0.0.1:8000";
 import _ from "lodash";
 
 export default {
-  name: "genreMovieitem",
+  name: "genreMovieitem2",
   components: {
     StarRating,
   },
@@ -258,7 +263,7 @@ export default {
       dataPerPage: 5,
       curPageNum: 1,
       valid: false,
-      randomMovie1Comment: "",
+      randomMovie3Comment: "",
       model: null,
       userId: null,
       rating: 3,
@@ -291,13 +296,16 @@ export default {
     };
   },
   computed: {
-    randomGenreMovies1() {
-      const pickedMovies = _.sampleSize(this.$store.state.randomGenreMovies1, 20)
-      return pickedMovies
+    randomGenreMovies3() {
+      const pickedMovies = _.sampleSize(
+        this.$store.state.randomGenreMovies3,
+        20
+      );
+      return pickedMovies;
     },
-    randomGenre1(){
-      const genresId = this.$store.state.randomGenre1
-      return this.genres[genresId]
+    randomGenre3() {
+      const genresId = this.$store.state.randomGenre3;
+      return this.genres[genresId];
     },
     startOffset() {
       return (this.curPageNum - 1) * this.dataPerPage;
@@ -315,7 +323,6 @@ export default {
 
   methods: {
      getGenre(rendommovie) {
-      // const movieListLen= movies.length
       const genresDic = this.genres;
         let newGenre = [];
         for (let movieGenre of rendommovie.genre_ids) {
@@ -346,7 +353,7 @@ export default {
     },
     createMovieComment(pickedMovie) {
       const rates = this.rating;
-      const movie_comment = this.randomMovie1Comment;
+      const movie_comment = this.randomMovie3Comment;
       if (movie_comment == "") {
         alert("글을 입력하세요");
         return;
@@ -370,7 +377,7 @@ export default {
             this.getAvg();
           });
 
-          this.randomMovie1Comment = "";
+          this.randomMovie3Comment = "";
           this.rating = 3;
         })
         .catch(() => {
@@ -407,11 +414,50 @@ export default {
       });
     },
   },
-  created() {
-
-  },
+  created() {},
 };
 </script>
 
 <style>
+details {
+  margin-bottom: 1rem;
+  background-color: transparent;
+}
+
+details > summary {
+  background-color: transparent;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+details > summary::-webkit-details-marker {
+  color: transparent;
+  transform: rotate3d(0, 0, 1, 90deg);
+  transition: transform 0.25s;
+  background-color: transparent;
+}
+
+details[open] > summary::-webkit-details-marker {
+  transform: rotate3d(0, 0, 1, 180deg);
+}
+
+details[open] > summary {
+  background-color: transparent;
+}
+
+details[open] > summary ~ * {
+  animation: reveal 0.5s;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -10px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
 </style>

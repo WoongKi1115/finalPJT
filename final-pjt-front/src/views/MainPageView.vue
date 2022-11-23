@@ -4,6 +4,8 @@
     <br>
     <recentMovieitem />
     <genreMovieitem />
+    <genreMovieitem1 />
+    <genreMovieitem2 />
   </div>
 </template>
 
@@ -11,6 +13,8 @@
 import popularMovie from "@/components/popularMovie";
 import recentMovieitem from "@/components/recentMovieitem";
 import genreMovieitem from "@/components/genreMovieitem";
+import genreMovieitem1 from "@/components/genreMovieitem1";
+import genreMovieitem2 from "@/components/genreMovieitem2";
 
 export default {
   name: "MainPageView",
@@ -18,6 +22,8 @@ export default {
     popularMovie,
     recentMovieitem,
     genreMovieitem,
+    genreMovieitem1,
+    genreMovieitem2,
   },
   data() {
     return {

@@ -12,8 +12,12 @@ export default new Vuex.Store({
     recenteMovie: null,
     classifiedMovie:null,
     loginUser: null,
-    randomGenreMovies:null,
-    randomGenre:null
+    randomGenreMovies1:null,
+    randomGenre1:null,
+    randomGenreMovies2:null,
+    randomGenre2:null,
+    randomGenreMovies3:null,
+    randomGenre3:null,
   },
   getters: {
   },
