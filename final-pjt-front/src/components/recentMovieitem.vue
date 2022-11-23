@@ -51,40 +51,67 @@
                             <h1>{{ recentmovie.title }}</h1>
                             <br />
                             <br />
-                            <div class="d-flex justify-space-around">
-                              <div>
-                                <label for="genre">장르 : </label>
-                                <span
-                                  id="genre"
-                                  v-for="(
-                                    genre, index
-                                  ) in recentmovie.genre_ids"
-                                  :key="index"
+                            <v-row>
+                              <v-col cols="6" style="font-size: medium">
+                                <div class="d-flex">
+                                  <label for="genre">장르 :&nbsp;</label>
+                                  <span
+                                    id="genre"
+                                    v-for="(
+                                      genre, index
+                                    ) in recentmovie.genre_ids"
+                                    :key="index"
+                                  >
+                                    {{ genre }}&nbsp;&nbsp;&nbsp;
+                                  </span>
+                                </div>
+                                <div class="d-flex my-2">
+                                  개봉일 : {{ recentmovie.release_date }}
+                                </div>
+                                <div class="d-flex">
+                                  감독 : {{ recentmovie.director }}
+                                </div>
+                                <div
+                                  class="d-flex my-2"
+                                  style="text-align: left"
                                 >
-                                  {{ genre }}&nbsp;&nbsp;&nbsp;
-                                </span>
-                              </div>
-                              <span
-                                >평점 :
-                                <star-rating
-                                  :increment="0.01"
-                                  :rating="averageStar"
-                                  :read-only="true"
-                                  :show-rating="false"
-                                  :star-size="20"
-                                ></star-rating
-                                >{{ averageRate }}</span
-                              >
-                              <span
-                                >개봉일 : {{ recentmovie.release_date }}</span
-                              >
-                            </div>
+                                  주연 :
+                                  {{
+                                    recentmovie.actors
+                                      .replace(/\[/g, "")
+                                      .replace(/\]/g, "")
+                                      .replace(/\'/g, "")
+                                  }}
+                                </div>
+                                <div class="d-flex">
+                                  평점 :
+                                  <star-rating
+                                    class="mx-3"
+                                    :increment="0.01"
+                                    :rating="averageStar"
+                                    :read-only="true"
+                                    :show-rating="false"
+                                    :star-size="20"
+                                  ></star-rating
+                                  >{{ averageRate }}
+                                </div>
+                              </v-col>
+                            </v-row>
                             <br />
-                            <br />
-                            <label for="overview">줄거리 : </label>
-                            <span id="overview">{{
-                              recentmovie.overview
-                            }}</span>
+                            <label
+                              for="overview"
+                              style="font-size: medium; text-align: left"
+                              >줄거리 :
+                            </label>
+                            <span
+                              id="overview"
+                              style="
+                                font-size: medium;
+                                text-align: left;
+                                line-height: 180%;
+                              "
+                              >{{ recentmovie.overview }}</span
+                            >
                           </div>
                           <div
                             style="
@@ -93,7 +120,7 @@
                               background-color: #222222;
                               color: black;
                               position: absolute;
-                              top: 350px;
+                              top: 420px;
                             "
                           >
                             <div
@@ -101,14 +128,7 @@
                                 border: 2px solid #e50914;
                                 border-radius: 20px;
                               "
-                              class="
-                                d-flex
-                                justify-content-around
-                                mt-1
-                                pa-5
-                                pb-5
-                                pt-0
-                              "
+                              class="d-flex justify-content-around mt-1 pa-5 pb-5 pt-0"
                             >
                               <div class="text-center mb-3">
                                 <span
@@ -199,14 +219,18 @@
                                   <br />
                                   <v-divider class="mt-2" dark></v-divider>
                                 </v-list-item-title>
-                                <div class="text-center">
-                                  <v-pagination
-                                    v-model="curPageNum"
-                                    :length="numOfPages"
-                                  ></v-pagination>
-                                </div>
                               </v-list-item-content>
                             </v-list-item>
+                            <div
+                              class="text-center"
+                              v-show="countComment(movie_comment)"
+                              style="align-item-end"
+                            >
+                              <v-pagination
+                                v-model="curPageNum"
+                                :length="numOfPages"
+                              ></v-pagination>
+                            </div>
                           </div>
                         </div>
                       </v-col>
@@ -252,19 +276,26 @@ export default {
       return this.$store.state.recenteMovie;
     },
     startOffset() {
-        return ((this.curPageNum - 1) * this.dataPerPage);
-      },
-      endOffset() {
-        return (this.startOffset + this.dataPerPage);
-      },
-      numOfPages() {
-        return Math.ceil(this.movie_comment.length / this.dataPerPage);
-      },
-      calData() {
-        return this.movie_comment.slice(this.startOffset, this.endOffset)
-      }
+      return (this.curPageNum - 1) * this.dataPerPage;
+    },
+    endOffset() {
+      return this.startOffset + this.dataPerPage;
+    },
+    numOfPages() {
+      return Math.ceil(this.movie_comment.length / this.dataPerPage);
+    },
+    calData() {
+      return this.movie_comment.slice(this.startOffset, this.endOffset);
+    },
   },
   methods: {
+    countComment(comment) {
+      if (comment.length < 1) {
+        return false;
+      } else {
+        return true;
+      }
+    },
     getAvg() {
       let summ = 0;
       for (const rate in this.movie_comment) {
@@ -293,22 +324,22 @@ export default {
         headers: {
           Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
         },
-      }).then(() => {
-        axios({
-          method: "get",
-          url: `${API_URL}/api/v1/${pickedMovie.id}/moviecomment/`,
-        }).then((res) => {
-          this.movie_comment = res.data;
-          this.pickedMovieId = pickedMovie.id;
-          this.userId = this.$store.state.loginUser.id;
-          this.getAvg();
-        });
-        
-        
-        this.recentMovieComment = "";
-        this.rating = 3;
       })
-      .catch(() => {
+        .then(() => {
+          axios({
+            method: "get",
+            url: `${API_URL}/api/v1/${pickedMovie.id}/moviecomment/`,
+          }).then((res) => {
+            this.movie_comment = res.data;
+            this.pickedMovieId = pickedMovie.id;
+            this.userId = this.$store.state.loginUser.id;
+            this.getAvg();
+          });
+
+          this.recentMovieComment = "";
+          this.rating = 3;
+        })
+        .catch(() => {
           alert("로그인해!");
           this.$router.push("login");
         });
