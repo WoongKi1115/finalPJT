@@ -29,8 +29,8 @@
       </v-col>
     </v-row>
     <br />
-    <v-btn elevation="2" small outlined @click="login" class="me-5">로그인</v-btn>
-    <v-btn elevation="2" small outlined @click="goSignup">회원 가입</v-btn>
+    <v-btn elevation="2" small outlined  class="me-5" @click="goSignup">회원 가입</v-btn>
+    <v-btn elevation="2" small outlined @click="login">로그인</v-btn>
   </div>
   </v-col>
   <v-col cols="3"></v-col>

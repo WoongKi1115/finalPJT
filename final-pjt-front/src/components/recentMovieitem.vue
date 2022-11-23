@@ -115,7 +115,7 @@
                                   class="text-caption mr-2"
                                   style="color: white"
                                 >
-                                  ({{ rating }})
+                                  ({{ rating * 2 }})
                                 </span>
                                 <star-rating
                                   :increment="0.5"

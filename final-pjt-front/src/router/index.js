@@ -8,6 +8,7 @@ import CommunityView from '@/views/CommunityView'
 import createArticle from '@/views/createArticle'
 import MyPageView from '@/views/MyPageView'
 import CommunityDetailView from '@/views/CommunityDetailView'
+import SearchView from '@/views/SearchView'
 
 Vue.use(VueRouter)
 
@@ -51,6 +52,11 @@ const routes = [
     path: '/:id',
     name: 'communityDetail',
     component: CommunityDetailView
+  },
+  {
+    path: '/search/:keyword',
+    name: 'search',
+    component: SearchView
   },
 ]
 

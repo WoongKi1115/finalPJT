@@ -7,8 +7,16 @@
           <img style="width:60px" src="@/assets/1212.jpg" alt="로고자리" />
         </router-link>
       </div>
-
       <v-spacer> </v-spacer>
+      <div><v-text-field
+        v-model="searchKeyword"
+        append-icon="mdi-magnify"
+        label="Search"
+        single-line
+        hide-details
+        dark
+        class="ms-15"
+      ></v-text-field></div>
       <div>
         <router-link style="text-decoration:none"  :to="{ name: 'community' }" class="white--text mx-3"
           >Community</router-link
@@ -49,6 +57,7 @@ export default {
 
   data() {
     return {
+      searchKeyword:null,
       isLoggedIn: false,
       movies: [],
       popularMovies: null,
