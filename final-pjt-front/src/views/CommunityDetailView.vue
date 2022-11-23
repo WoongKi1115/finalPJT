@@ -145,7 +145,6 @@ export default {
           Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
         },
       }).then(() => {
-        console.log('성공')
         this.$router.go()
       });
 

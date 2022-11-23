@@ -16,6 +16,8 @@
         hide-details
         dark
         class="ms-15"
+        @click:append="doSearch()"
+        @keyup.enter="doSearch()"
       ></v-text-field></div>
       <div>
         <router-link style="text-decoration:none"  :to="{ name: 'community' }" class="white--text mx-3"
@@ -187,6 +189,12 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    doSearch() {
+      const keyword = this.searchKeyword
+      this.$router.push({ name: "search", params: {keyword} });
+      console.log(keyword)
+      this.searchKeyword = null
     },
 
     // 로그인쪽
