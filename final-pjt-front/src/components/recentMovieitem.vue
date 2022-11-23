@@ -3,12 +3,18 @@
     <h1>RecentMovie</h1>
     <v-sheet class="mx-auto" max-width="1800">
       <v-slide-group
-        dark
         style="height: 550px"
         class="pa-4 recentmovie"
         active-class="success"
+        prev-icon="fa-duotone fa-angle-right"
         show-arrows
       >
+      <template v-slot:next>
+            <v-icon color="white" large>fa-light fa-chevron-right</v-icon>
+          </template>
+              <template v-slot:prev>
+            <v-icon color="white" large>fa-light fa-angle-left</v-icon>
+            </template>
         <v-slide-item
           class="mt-6"
           v-for="(recentmovie, index) in recenteMovies"
@@ -48,11 +54,11 @@
                           <div
                             style="position: relative; top: 20px; width: 90%"
                           >
-                            <h1>{{ recentmovie.title }}</h1>
+                            <h2>{{ recentmovie.title }}</h2>
                             <br />
                             <br />
                             <v-row>
-                              <v-col cols="6" style="font-size: medium">
+                              <v-col cols="9" style="font-size: medium">
                                 <div class="d-flex">
                                   <label for="genre">장르 :&nbsp;</label>
                                   <span
@@ -97,21 +103,11 @@
                                 </div>
                               </v-col>
                             </v-row>
-                            <br />
-                            <label
-                              for="overview"
-                              style="font-size: medium; text-align: left"
-                              >줄거리 :
-                            </label>
-                            <span
-                              id="overview"
-                              style="
-                                font-size: medium;
-                                text-align: left;
-                                line-height: 180%;
-                              "
-                              >{{ recentmovie.overview }}</span
-                            >
+                            <v-card height="150" dark class="ms-6 mt-3 overview overflow-auto">
+                              <v-card-text  dark>
+                                {{ recentmovie.overview }}
+                              </v-card-text>
+                            </v-card>
                           </div>
                           <div
                             style="

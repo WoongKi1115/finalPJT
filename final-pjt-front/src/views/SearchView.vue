@@ -4,7 +4,7 @@
       <v-container>
         <v-row>
           <v-col v-for="movie in searchedMovieList" :key="movie.pk" cols="12" md="3">
-            <v-card class="ma-4 pa-1 posterimg" height="450" width="300">
+            <v-card class="ma-4 pa-1 posterimg" height="500" width="300">
             <div class="text-center">
               <v-dialog width="1800">
                 <template v-slot:activator="{ on, attrs }">
@@ -19,6 +19,7 @@
                     @click="getMovieComment(movie)"
                   >
                   </v-img>
+                  <h4 class="mt-2">{{movie.title}}</h4>
                 </template>
 
                 <v-card>
@@ -38,13 +39,13 @@
                           <div
                             style="position: relative; top: 20px; width: 90%"
                           >
-                            <h1>{{ movie.title }}</h1>
+                            <h2>{{ movie.title }}</h2>
                             <br />
                             <br />
                             <v-row>
-                              <v-col cols="6" style="font-size: medium">
+                              <v-col cols="9" style="font-size: medium">
                                 <div class="d-flex">
-                                <label for="genre">장르 : </label>
+                                <label for="genre">장르 :&nbsp; </label>
                                 <span
                                   id="genre"
                                   v-for="(
@@ -87,14 +88,11 @@
                                   >
                                 </v-col>
                                 </v-row>
-                            <label for="overview" style="font-size: medium; text-align: left">줄거리 : </label>
-                            <span id="overview" style="
-                                font-size: medium;
-                                text-align: left;
-                                line-height: 180%;
-                              ">{{
-                              movie.overview
-                            }}</span>
+                            <v-card height="150" dark class="ms-6 mt-3 overview overflow-auto">
+                              <v-card-text  dark>
+                                {{ movie.overview }}
+                              </v-card-text>
+                            </v-card>
                           </div>
                           <div
                             style="

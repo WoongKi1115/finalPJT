@@ -33,7 +33,7 @@
           v-show="!this.isLoggedIn"
           >Login</router-link
         >
-        <button v-show="this.isLoggedIn" @click="logOut" style="text-decoration:none; color:white">Loggout</button>
+        <button v-show="this.isLoggedIn" @click="logOut" style="text-decoration:none; color:white">Logout</button>
         <router-link  v-show="!this.isLoggedIn" style="text-decoration:none" :to="{ name: 'signup' }" class="white--text mx-3"
           >Signup</router-link
         >
@@ -182,9 +182,15 @@ export default {
     },
     getRandomGenre() {
 		const genres = [12, 14, 16, 18, 27, 28, 35, 36, 37, 53, 80, 99, 878, 9648, 10402, 10749, 10751, 10752, 10770]
-    const randomGenre = _.sample(genres)
-    this.$store.state.randomGenre = randomGenre
-    this.$store.state.randomGenreMovies = this.calssifiedGenres[randomGenre]
+    const randomGenre = _.samplesize(genres, 3)
+    console.log(randomGenre)
+    console.log(randomGenre[0])
+    this.$store.state.randomGenre1 = randomGenre[0]
+    this.$store.state.randomGenre2 = randomGenre[1]
+    this.$store.state.randomGenre3 = randomGenre[2]
+    this.$store.state.randomGenreMovies1 = this.calssifiedGenres[randomGenre[0]]
+    this.$store.state.randomGenreMovies2 = this.calssifiedGenres[randomGenre[1]]
+    this.$store.state.randomGenreMovies3 = this.calssifiedGenres[randomGenre[2]]
     },
     getArticle() {
       axios({
