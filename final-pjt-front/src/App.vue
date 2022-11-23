@@ -37,9 +37,6 @@
         <router-link  v-show="!this.isLoggedIn" style="text-decoration:none" :to="{ name: 'signup' }" class="white--text mx-3"
           >Signup</router-link
         >
-        <router-link  v-show="this.isLoggedIn" style="text-decoration:none" :to="{ name: 'mypage' }" class="white--text mx-3"
-          >Mypage</router-link
-        >
       </div>
     </v-app-bar>
 
