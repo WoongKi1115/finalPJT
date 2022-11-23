@@ -313,16 +313,18 @@
                             <v-row>
                               <v-col cols="6" style="font-size: medium">
                                 <div class="d-flex">
-                                <label for="genre">장르 : &nbsp;</label>
-                                <span
-                                  id="genre"
-                                  v-for="(genre, index) in rcdMovie.genre_ids"
-                                  :key="index"
-                                >
-                                  {{ genre }}&nbsp;&nbsp;&nbsp;
-                                </span>
+                                  <label for="genre">장르 : &nbsp;</label>
+                                  <span
+                                    id="genre"
+                                    v-for="(genre, index) in rcdMovie.genre_ids"
+                                    :key="index"
+                                  >
+                                    {{ genre }}&nbsp;&nbsp;&nbsp;
+                                  </span>
                                 </div>
-                                <div class="d-flex my-2">개봉일 : {{ rcdMovie.release_date }}</div>
+                                <div class="d-flex my-2">
+                                  개봉일 : {{ rcdMovie.release_date }}
+                                </div>
                                 <div class="d-flex">
                                   감독 : {{ rcdMovie.director }}
                                 </div>
@@ -338,28 +340,36 @@
                                       .replace(/\'/g, "")
                                   }}
                                 </div>
-                                <div class="d-flex"
-                                >평점 :
-                                <star-rating
-                                  class="mx-3"
-                                  :increment="0.01"
-                                  :rating="averageStar"
-                                  :read-only="true"
-                                  :show-rating="false"
-                                  :star-size="20"
-                                ></star-rating
-                                >{{ averageRate }}</div
-                                >
+                                <div class="d-flex">
+                                  평점 :
+                                  <star-rating
+                                    class="mx-3"
+                                    :increment="0.01"
+                                    :rating="averageStar"
+                                    :read-only="true"
+                                    :show-rating="false"
+                                    :star-size="20"
+                                  ></star-rating
+                                  >{{ averageRate }}
+                                </div>
                               </v-col>
-                              </v-row>
+                            </v-row>
                             <br />
                             <br />
-                            <label for="overview" style="font-size: medium; text-align: left">줄거리 : </label>
-                            <span id="overview" style="
+                            <label
+                              for="overview"
+                              style="font-size: medium; text-align: left"
+                              >줄거리 :
+                            </label>
+                            <span
+                              id="overview"
+                              style="
                                 font-size: medium;
                                 text-align: left;
                                 line-height: 180%;
-                              ">{{ rcdMovie.overview }}</span>
+                              "
+                              >{{ rcdMovie.overview }}</span
+                            >
                           </div>
                           <div
                             style="
@@ -474,7 +484,10 @@
                                   <br />
                                   <v-divider class="mt-2" dark></v-divider>
                                 </v-list-item-title>
-                                <div class="text-center"  v-show="countComment(movie_comment)">
+                                <div
+                                  class="text-center"
+                                  v-show="countComment(movie_comment)"
+                                >
                                   <v-pagination
                                     v-model="curPageNum"
                                     :length="numOfPages"
@@ -508,9 +521,9 @@ export default {
   methods: {
     countComment(comment) {
       if (comment.length < 1) {
-        return false
+        return false;
       } else {
-        return true
+        return true;
       }
     },
     getAvg() {

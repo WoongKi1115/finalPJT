@@ -61,6 +61,7 @@ export default {
       movies: [],
       popularMovies: null,
       recenteMovies: null,
+      randomMovies: null,
       genres: {
         28: "액션",
         12: "모험",
@@ -124,7 +125,11 @@ export default {
           this.$store.state.recenteMovie = this.recenteMovies
           this.classifyGenre()
           this.getArticle();
+          this.getRandomGenre()
          
+        })
+        .then(() => {
+          
         })
         .catch((err) => {
           console.log(err);
@@ -174,6 +179,11 @@ export default {
         }
       }
       this.$store.state.classifiedMovie = this.calssifiedGenres
+    },
+    getRandomGenre() {
+		const genres = [12, 14, 16, 18, 27, 28, 35, 36, 37, 53, 80, 99, 878, 9648, 10402, 10749, 10751, 10752, 10770]
+    const randomGenre = _.sample(genres)
+    this.$store.state.randomGenreMovies = this.calssifiedGenres[randomGenre]
     },
     getArticle() {
       axios({
