@@ -418,6 +418,7 @@
                                     </div>
                                     <div style="float: left; width: 20%">
                                       <star-rating
+                                        :increment="0.5"
                                         :rating="comment.rates"
                                         :read-only="true"
                                         :show-rating="false"

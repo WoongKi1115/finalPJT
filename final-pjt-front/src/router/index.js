@@ -6,7 +6,6 @@ import LoginPageView from '@/views/LoginPageView'
 import SignupPageView from '@/views/SignupPageView'
 import CommunityView from '@/views/CommunityView'
 import createArticle from '@/views/createArticle'
-import MyPageView from '@/views/MyPageView'
 import CommunityDetailView from '@/views/CommunityDetailView'
 import SearchView from '@/views/SearchView'
 
@@ -42,11 +41,6 @@ const routes = [
     path: '/create',
     name: 'createArticle',
     component: createArticle
-  },
-  {
-    path: '/mypage',
-    name: 'mypage',
-    component: MyPageView
   },
   {
     path: '/:id',

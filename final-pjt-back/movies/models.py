@@ -29,7 +29,7 @@ class Rating(models.Model):
                              on_delete=models.CASCADE, related_name='ratings')
     movie = models.ForeignKey(
         Movie, on_delete=models.CASCADE, related_name='ratings')
-    rates = models.PositiveIntegerField(
+    rates = models.FloatField(
         default=3, validators=[MinValueValidator(0.5), MaxValueValidator(5)])
     movie_comment = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
