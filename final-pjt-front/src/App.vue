@@ -183,6 +183,7 @@ export default {
     getRandomGenre() {
 		const genres = [12, 14, 16, 18, 27, 28, 35, 36, 37, 53, 80, 99, 878, 9648, 10402, 10749, 10751, 10752, 10770]
     const randomGenre = _.sample(genres)
+    this.$store.state.randomGenre = randomGenre
     this.$store.state.randomGenreMovies = this.calssifiedGenres[randomGenre]
     },
     getArticle() {

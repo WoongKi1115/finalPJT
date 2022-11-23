@@ -2,12 +2,13 @@
   <div>
 
     <h1>GenreMovie</h1>
+    <p>{{ randomGenre }}</p>
     <p>{{ randomGenreMovies }}</p>
   </div>
 </template>
 
 <script>
-// import _ from "lodash";
+import _ from "lodash";
 
 export default {
   name: "genreMovieitem",
@@ -18,14 +19,18 @@ export default {
   },
   computed: {
     randomGenreMovies() {
-      return this.$store.state.randomGenreMovies;
+      const pickedMovies = _.sampleSize(this.$store.state.randomGenreMovies, 20)
+      return pickedMovies
     },
+    randomGenre(){
+      return this.$store.state.randomGenre
+    }
   },
 
   methods: {
   },
   created() {
-    
+
   },
 };
 </script>
