@@ -41,8 +41,9 @@
                             <h1>{{ movie.title }}</h1>
                             <br />
                             <br />
-                            <div class="d-flex justify-space-around">
-                              <div>
+                            <v-row>
+                              <v-col cols="6" style="font-size: medium">
+                                <div class="d-flex">
                                 <label for="genre">장르 : </label>
                                 <span
                                   id="genre"
@@ -54,25 +55,44 @@
                                   {{ genre }}&nbsp;&nbsp;&nbsp;
                                 </span>
                               </div>
-                              <span
-                                >평점 :
-                                <star-rating
+                              <div class="d-flex my-2"
+                              >개봉일 : {{ movie.release_date }}</div
+                              >
+                              <div class="d-flex">
+                                  감독 : {{ movie.director }}
+                                </div>
+                                <div
+                                  class="d-flex my-2"
+                                  style="text-align: left"
+                                >
+                                  주연 :
+                                  {{
+                                    movie.actors
+                                      .replace(/\[/g, "")
+                                      .replace(/\]/g, "")
+                                      .replace(/\'/g, "")
+                                  }}
+                                </div>
+                              <div class="d-flex"
+                              >평점 :
+                              <star-rating
+                                  class="mx-3"
                                   :increment="0.01"
                                   :rating="averageStar"
                                   :read-only="true"
                                   :show-rating="false"
                                   :star-size="20"
-                                ></star-rating
-                                >{{ averageRate }}</span
-                              >
-                              <span
-                                >개봉일 : {{ movie.release_date }}</span
-                              >
-                            </div>
-                            <br />
-                            <br />
-                            <label for="overview">줄거리 : </label>
-                            <span id="overview">{{
+                                  ></star-rating
+                                  >{{ averageRate }}</div
+                                  >
+                                </v-col>
+                                </v-row>
+                            <label for="overview" style="font-size: medium; text-align: left">줄거리 : </label>
+                            <span id="overview" style="
+                                font-size: medium;
+                                text-align: left;
+                                line-height: 180%;
+                              ">{{
                               movie.overview
                             }}</span>
                           </div>
@@ -83,7 +103,7 @@
                               background-color: #222222;
                               color: black;
                               position: absolute;
-                              top: 350px;
+                              top: 420px;
                             "
                           >
                             <div
@@ -189,7 +209,9 @@
                                   <br />
                                   <v-divider class="mt-2" dark></v-divider>
                                 </v-list-item-title>
-                                <div class="text-center">
+                                <div class="text-center"
+                                v-show="countComment(movie_comment)"
+                              style="align-item-end">
                                   <v-pagination
                                     v-model="curPageNum"
                                     :length="numOfPages"
@@ -241,6 +263,13 @@ export default {
   },
 
   methods:{
+    countComment(comment) {
+      if (comment.length < 1) {
+        return false;
+      } else {
+        return true;
+      }
+    },
     getAvg() {
       let summ = 0;
       for (const rate in this.movie_comment) {
@@ -326,7 +355,9 @@ export default {
           let originTitle = this.allMovies[id].original_title.toLowerCase()
           // console.log(movietitle)
           if (movietitle.includes(oneWord) || originTitle.includes(oneWord.toLowerCase())){
-            this.searchedMovieList.push(this.allMovies[id])
+            if (!this.searchedMovieList.includes(this.allMovies[id])) {
+              this.searchedMovieList.push(this.allMovies[id])
+            }
           }
       }
       }

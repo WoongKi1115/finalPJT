@@ -310,9 +310,10 @@
                             <h1>{{ rcdMovie.title }}</h1>
                             <br />
                             <br />
-                            <div class="d-flex justify-space-around">
-                              <div>
-                                <label for="genre">장르 : </label>
+                            <v-row>
+                              <v-col cols="6" style="font-size: medium">
+                                <div class="d-flex">
+                                <label for="genre">장르 : &nbsp;</label>
                                 <span
                                   id="genre"
                                   v-for="(genre, index) in rcdMovie.genre_ids"
@@ -320,24 +321,45 @@
                                 >
                                   {{ genre }}&nbsp;&nbsp;&nbsp;
                                 </span>
-                              </div>
-                              <span
+                                </div>
+                                <div class="d-flex my-2">개봉일 : {{ rcdMovie.release_date }}</div>
+                                <div class="d-flex">
+                                  감독 : {{ rcdMovie.director }}
+                                </div>
+                                <div
+                                  class="d-flex my-2"
+                                  style="text-align: left"
+                                >
+                                  주연 :
+                                  {{
+                                    rcdMovie.actors
+                                      .replace(/\[/g, "")
+                                      .replace(/\]/g, "")
+                                      .replace(/\'/g, "")
+                                  }}
+                                </div>
+                                <div class="d-flex"
                                 >평점 :
                                 <star-rating
+                                  class="mx-3"
                                   :increment="0.01"
                                   :rating="averageStar"
                                   :read-only="true"
                                   :show-rating="false"
                                   :star-size="20"
                                 ></star-rating
-                                >{{ averageRate }}</span
-                              >
-                              <span>개봉일 : {{ rcdMovie.release_date }}</span>
-                            </div>
+                                >{{ averageRate }}</div
+                                >
+                              </v-col>
+                              </v-row>
                             <br />
                             <br />
-                            <label for="overview">줄거리 : </label>
-                            <span id="overview">{{ rcdMovie.overview }}</span>
+                            <label for="overview" style="font-size: medium; text-align: left">줄거리 : </label>
+                            <span id="overview" style="
+                                font-size: medium;
+                                text-align: left;
+                                line-height: 180%;
+                              ">{{ rcdMovie.overview }}</span>
                           </div>
                           <div
                             style="
@@ -346,7 +368,7 @@
                               background-color: #222222;
                               color: black;
                               position: absolute;
-                              top: 350px;
+                              top: 420px;
                             "
                           >
                             <div
@@ -452,7 +474,7 @@
                                   <br />
                                   <v-divider class="mt-2" dark></v-divider>
                                 </v-list-item-title>
-                                <div class="text-center">
+                                <div class="text-center"  v-show="countComment(movie_comment)">
                                   <v-pagination
                                     v-model="curPageNum"
                                     :length="numOfPages"
@@ -484,6 +506,13 @@ const API_URL = "http://127.0.0.1:8000";
 export default {
   name: "MoviePickView",
   methods: {
+    countComment(comment) {
+      if (comment.length < 1) {
+        return false
+      } else {
+        return true
+      }
+    },
     getAvg() {
       let summ = 0;
       for (const rate in this.movie_comment) {
@@ -603,7 +632,7 @@ export default {
         if (count) {
           let i = 0;
           const recommendedMovie = _.cloneDeep(this.classifyMovie[id]);
-          while (i < count * 2) {
+          while (i < count * 4) {
             const randomMovie = _.sample(recommendedMovie);
             if (!this.recommendMovieId.includes(randomMovie.id)) {
               this.recommendMovie.push(randomMovie);

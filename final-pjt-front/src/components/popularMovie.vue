@@ -4,7 +4,6 @@
     <v-row class="d-flex justify-center">
       <v-col cols="10">
         <v-carousel
-          cycle
           hide-delimiter-background
           height="700"
           class="popular-movie-carousel"
@@ -69,37 +68,62 @@
                                 <h1>{{ popularMovie.title }}</h1>
                                 <br />
                                 <br />
-                                <div class="d-flex justify-space-around">
-                                  <div>
-                                    <label for="genre">장르 : </label>
-                                    <span
-                                      id="genre"
-                                      v-for="(
-                                        genre, index
-                                      ) in popularMovie.genre_ids"
-                                      :key="index"
+                                <v-row>
+                                  <v-col cols="6" style="font-size: medium">
+                                    <div class="d-flex">
+                                      <label for="genre">장르 : </label>
+                                      <span
+                                        id="genre"
+                                        v-for="(
+                                          genre, index
+                                        ) in popularMovie.genre_ids"
+                                        :key="index"
+                                      >
+                                        {{ genre }}&nbsp;&nbsp;&nbsp;
+                                      </span>
+                                    </div>
+                                    <div class="d-flex my-2">
+                                      개봉일 : {{ popularMovie.release_date }}
+                                    </div>
+                                    <div class="d-flex">
+                                      감독 : {{ popularMovie.director }}
+                                    </div>
+                                    <div
+                                      class="d-flex my-2"
+                                      style="text-align: left"
                                     >
-                                      {{ genre }}&nbsp;&nbsp;&nbsp;
-                                    </span>
-                                  </div>
-                                  <span
-                                    >평점 :
-                                    <star-rating
+                                      주연 :
+                                      {{
+                                        popularMovie.actors
+                                          .replace(/\[/g, "")
+                                          .replace(/\]/g, "")
+                                          .replace(/\'/g, "")
+                                      }}
+                                    </div>
+                                    <div class="d-flex"
+                                      >평점 :
+                                      <star-rating
+                                        class="mx-3"
                                         :increment="0.01"
                                         :rating="averageStar"
                                         :read-only="true"
                                         :show-rating="false"
                                         :star-size="20"
-                                      ></star-rating>{{ averageRate }}</span>
-                                  <span
-                                    >개봉일 :
-                                    {{ popularMovie.release_date }}</span
-                                  >
-                                </div>
+                                      ></star-rating
+                                      >{{ averageRate }}</div
+                                    >
+                                  </v-col>
+                                </v-row>
                                 <br />
                                 <br />
-                                <label for="overview">줄거리 : </label>
-                                <span id="overview">{{
+                                <label for="overview" style="font-size: medium; text-align: left"
+                              >줄거리 : </label>
+                                <span id="overview"
+                                style="
+                                font-size: medium;
+                                text-align: left;
+                                line-height: 180%;
+                              ">{{
                                   popularMovie.overview
                                 }}</span>
                               </div>
@@ -110,7 +134,7 @@
                                   background-color: #222222;
                                   color: black;
                                   position: absolute;
-                                  top: 350px;
+                                  top: 420px;
                                 "
                               >
                                 <div
@@ -118,14 +142,7 @@
                                     border: 2px solid #e50914;
                                     border-radius: 20px;
                                   "
-                                  class="
-                                    d-flex
-                                    justify-content-around
-                                    mt-1
-                                    pa-5
-                                    pb-5
-                                    pt-0
-                                  "
+                                  class="d-flex justify-content-around mt-1 pa-5 pb-5 pt-0"
                                 >
                                   <div class="text-center mb-3">
                                     <span
@@ -164,58 +181,73 @@
                                   </v-btn>
                                 </div>
                                 <v-list-item two-line>
-                              <v-list-item-content
-                                style="color: #eeeeee"
-                              >
-                                <v-list-item-title
-                                  class="mt-2"
-                                  style="display:float"
-                                  v-for="(comment, index) in calData"
-                                  :key="index"
-                                >
-                                <div>
-                                  <div style="font-size: large; float:left; width:5%" class="me-10"
-                                    >{{ comment.username }}&nbsp;&nbsp;</div
-                                  >
-                                  <div style="float:left; width:20%">
-                                  <star-rating
-                                    :increment="0.5"
-                                    :rating="comment.rates"
-                                    :read-only="true"
-                                    :show-rating="false"
-                                    :star-size="20"
-                                  ></star-rating>
-                                  </div>
-                                  <div
-                                   style="float:left; width:45%"
-                                   class="mt-1"
-                                    >{{
-                                      comment.movie_comment
-                                    }}&nbsp;&nbsp;&nbsp;&nbsp;
-                                  <button
-                                    v-show="comment.user === userId"
-                                    @click="deleteComment(comment.id)"
-                                  >
-                                    <i class="fa-solid fa-trash-can"></i>
-                                  </button>
-                                  </div
-                                  >
-                                  <div style="float:left; width:15%" class="mt-1">{{
-                                    comment.created_at
-                                      | moment("YYYY-MM-DD HH:mm:ss")
-                                  }}</div>
-                                  </div>
-                                  <br>
-                                  <v-divider class="mt-2" dark></v-divider>
-                                </v-list-item-title>
-                                <div class="text-center">
-                                  <v-pagination
-                                    v-model="curPageNum"
-                                    :length="numOfPages"
-                                  ></v-pagination>
-                                </div>
-                              </v-list-item-content>
-                            </v-list-item>
+                                  <v-list-item-content style="color: #eeeeee">
+                                    <v-list-item-title
+                                      class="mt-2"
+                                      style="display: float"
+                                      v-for="(comment, index) in calData"
+                                      :key="index"
+                                    >
+                                      <div>
+                                        <div
+                                          style="
+                                            font-size: large;
+                                            float: left;
+                                            width: 5%;
+                                          "
+                                          class="me-10"
+                                        >
+                                          {{ comment.username }}&nbsp;&nbsp;
+                                        </div>
+                                        <div style="float: left; width: 20%">
+                                          <star-rating
+                                            :increment="0.5"
+                                            :rating="comment.rates"
+                                            :read-only="true"
+                                            :show-rating="false"
+                                            :star-size="20"
+                                          ></star-rating>
+                                        </div>
+                                        <div
+                                          style="float: left; width: 45%"
+                                          class="mt-1"
+                                        >
+                                          {{
+                                            comment.movie_comment
+                                          }}&nbsp;&nbsp;&nbsp;&nbsp;
+                                          <button
+                                            v-show="comment.user === userId"
+                                            @click="deleteComment(comment.id)"
+                                          >
+                                            <i
+                                              class="fa-solid fa-trash-can"
+                                            ></i>
+                                          </button>
+                                        </div>
+                                        <div
+                                          style="float: left; width: 15%"
+                                          class="mt-1"
+                                        >
+                                          {{
+                                            comment.created_at
+                                              | moment("YYYY-MM-DD HH:mm:ss")
+                                          }}
+                                        </div>
+                                      </div>
+                                      <br />
+                                      <v-divider class="mt-2" dark></v-divider>
+                                    </v-list-item-title>
+                                    <div
+                                      class="text-center"
+                                      v-show="countComment(movie_comment)"
+                                    >
+                                      <v-pagination
+                                        v-model="curPageNum"
+                                        :length="numOfPages"
+                                      ></v-pagination>
+                                    </div>
+                                  </v-list-item-content>
+                                </v-list-item>
                               </div>
                             </div>
                           </v-col>
@@ -257,8 +289,8 @@ export default {
       pickedMovieId: null,
       isLoggedIn: false,
       nameRules: [(v) => v.length <= 50 || "댓글은 50자 이내로 작성해주세요!"],
-      averageRate:null,
-      averageStar:null,
+      averageRate: null,
+      averageStar: null,
     };
   },
   components: {
@@ -269,33 +301,40 @@ export default {
     popularMovies() {
       return this.$store.state.top10Movie;
     },
-     startOffset() {
-        return ((this.curPageNum - 1) * this.dataPerPage);
-      },
-      endOffset() {
-        return (this.startOffset + this.dataPerPage);
-      },
-      numOfPages() {
-        return Math.ceil(this.movie_comment.length / this.dataPerPage);
-      },
-      calData() {
-        return this.movie_comment.slice(this.startOffset, this.endOffset)
-      }
+    startOffset() {
+      return (this.curPageNum - 1) * this.dataPerPage;
+    },
+    endOffset() {
+      return this.startOffset + this.dataPerPage;
+    },
+    numOfPages() {
+      return Math.ceil(this.movie_comment.length / this.dataPerPage);
+    },
+    calData() {
+      return this.movie_comment.slice(this.startOffset, this.endOffset);
+    },
   },
   methods: {
-    getAvg() {
-      let summ = 0
-      for (const rate in this.movie_comment) {
-        summ += (this.movie_comment[rate].rates)*2
+    countComment(comment) {
+      if (comment.length < 1) {
+        return false;
+      } else {
+        return true;
       }
-      let result = summ / this.movie_comment.length
+    },
+    getAvg() {
+      let summ = 0;
+      for (const rate in this.movie_comment) {
+        summ += this.movie_comment[rate].rates * 2;
+      }
+      let result = summ / this.movie_comment.length;
       if (this.movie_comment.length === 0) {
-        this.averageRate = 0
-        this.averageStar = 0
-        return
-      } 
-      this.averageRate = result.toFixed(1) * 1
-      this.averageStar = result.toFixed(1) /2 * 1
+        this.averageRate = 0;
+        this.averageStar = 0;
+        return;
+      }
+      this.averageRate = result.toFixed(1) * 1;
+      this.averageStar = (result.toFixed(1) / 2) * 1;
     },
     openModal() {
       this.showModal = false;
@@ -326,7 +365,7 @@ export default {
             this.movie_comment = res.data;
             this.pickedMovieId = pickedMovie.id;
             this.userId = this.$store.state.loginUser.id;
-            this.getAvg()
+            this.getAvg();
           });
           this.popularMovieComment = "";
           this.rating = 3;
@@ -346,7 +385,7 @@ export default {
         this.movie_comment = res.data;
         this.pickedMovieId = pickedMovie.id;
         this.userId = this.$store.state.loginUser.id;
-        this.getAvg()
+        this.getAvg();
       });
     },
     deleteComment(pickedComment) {
@@ -362,7 +401,7 @@ export default {
           url: `${API_URL}/api/v1/${this.pickedMovieId}/moviecomment/`,
         }).then((res) => {
           this.movie_comment = res.data;
-          this.getAvg()
+          this.getAvg();
         });
       });
     },
