@@ -31,11 +31,10 @@
               >5가지&nbsp;&nbsp;상태를&nbsp;&nbsp;고르고&nbsp;&nbsp;추천받기&nbsp;&nbsp;버튼을&nbsp;&nbsp;눌러주세요!</v-toolbar-title
             >
             <v-spacer></v-spacer>
-            <v-toolbar-items>
               <v-btn  dark text @click="[save()]" class="my-font2">
                 추천받기
               </v-btn>
-            </v-toolbar-items>
+
           </v-toolbar>
           <v-list-item color="#E50914">
             <v-row class="d-flex justify-space-around mb-4">

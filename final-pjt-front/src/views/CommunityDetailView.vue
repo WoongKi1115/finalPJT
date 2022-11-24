@@ -22,7 +22,7 @@
       <div style="text-align: right; font-size: 14px">
         작성시간 : {{ article.created_at | moment("YYYY-MM-DD HH:mm:ss") }}
       </div>
-      <v-btn v-show="isYouers" color="" @click="deleteArticle" style="float:right">
+      <v-btn class="mt-3" small v-show="isYouers" color="" @click="deleteArticle" style="float:right">
         글 삭제 </v-btn
       >
       <div style="text-align: left; font-size: 19px" class="mt-10 mb-15">
