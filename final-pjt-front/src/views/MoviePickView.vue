@@ -1,7 +1,8 @@
 <template>
   <div class="recommendpage">
-    <h1>영화 추천해주는 페이지</h1>
-    <h3>설명란</h3>
+    <h1 class="mb-5">Moong' s Pick</h1>
+    <h4>오늘 하루는 어땠나요??</h4>
+    <h4 class="my-2">당신이 보고 싶은 영화를 알려드립니다!</h4>
     <v-row justify="center" class="mt-5">
       <v-dialog
         v-model="dialog"
@@ -26,12 +27,12 @@
             <v-btn icon dark @click="dialog = false">
               <v-icon>mdi-close</v-icon>
             </v-btn>
-            <v-toolbar-title
-              >5가지 상태를 고르고 추천받기 버튼을 눌러주세요!</v-toolbar-title
+            <v-toolbar-title class="my-font"
+              >5가지&nbsp;&nbsp;상태를&nbsp;&nbsp;고르고&nbsp;&nbsp;추천받기&nbsp;&nbsp;버튼을&nbsp;&nbsp;눌러주세요!</v-toolbar-title
             >
             <v-spacer></v-spacer>
             <v-toolbar-items>
-              <v-btn dark text @click="[save()]" class="my-font2">
+              <v-btn  dark text @click="[save()]" class="my-font2">
                 추천받기
               </v-btn>
             </v-toolbar-items>

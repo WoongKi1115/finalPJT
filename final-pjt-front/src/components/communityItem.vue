@@ -4,15 +4,14 @@
     class="selectArticle board_list_body pa-4 d-flex align-items-center"
     :class="{ id_hol: checkId }"
   >
-    <div class="articles_id" :class="{}">
+    <div class="articles_id">
       {{ article.id }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </div>
-    <div class="articles_title">{{ article.title }} ({{ commentsLengh }})</div>
+    <div class="articles_title ms-15">{{ article.title }} ({{ commentsLengh }})</div>
     <div class="articles_username">{{ article.username }}</div>
     <div class="articles_created_at">
       {{ article.created_at | moment("YYYY-MM-DD HH:mm:ss") }}
     </div>
-    <div class="articles_views">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;댓글</div>
   </div>
 </template>
 
@@ -77,12 +76,12 @@ export default {
 }
 .articles_title {
   float: left;
-  width: 55%;
+  width: 60%;
   text-align: left;
 }
 .articles_username {
   float: left;
-  width: 10%;
+  width: 15%;
 }
 .articles_created_at {
   float: left;
