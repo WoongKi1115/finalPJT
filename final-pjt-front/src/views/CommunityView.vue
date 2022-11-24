@@ -1,34 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Codespaces
-Marketplace
-Explore
- 
-@WoongKi1115 
-WoongKi1115
-/
-finalPJT
-Public
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-finalPJT/final-pjt-front/src/views/CommunityView.vue
-@WoongKi1115
-WoongKi1115 update
-Latest commit f02a0e1 16 hours ago
- History
- 2 contributors
-@WoongKi1115@moooonam
-124 lines (119 sloc)  2.56 KB
-
 <template>
   <div class="communitypage">
     <h1>Community</h1>
@@ -47,8 +16,6 @@ Latest commit f02a0e1 16 hours ago
   border-bottom: 2px solid #E50914;">작성자</div>
           <div class="articles_created_at" style="border-top: 2px solid #E50914;
   border-bottom: 2px solid #E50914;">작성일</div>
-          <div class="articles_views" style="border-top: 2px solid #E50914;
-  border-bottom: 2px solid #E50914;">조회</div>
         </div>
         <div >
         <communityItem
@@ -158,10 +125,10 @@ export default {
   width: 10%;
 }
 .articles_title {
-  width: 55%;
+  width: 60%;
 }
 .articles_username {
-  width: 10%;
+  width: 15%;
 }
 .articles_created_at {
   width: 15%;
@@ -170,18 +137,3 @@ export default {
   width: 10%;
 }
 </style>
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-finalPJT/CommunityView.vue at main · WoongKi1115/finalPJT

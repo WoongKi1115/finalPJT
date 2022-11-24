@@ -3,6 +3,17 @@
     <v-col cols="3"></v-col>
     <v-col cols="6">
   <div class="loginpage">
+    <v-btn
+     dark 
+      style="float: right"
+      class=""
+      fab
+      x-small
+      color="gray"
+      @click="goMain"
+    >
+      X
+    </v-btn>
     <h1>Login</h1>
     <v-row justify="center" align="center">
       <v-col cols="10">
@@ -49,6 +60,9 @@ export default {
     };
   },
   methods: {
+    goMain() {
+      this.$router.push({name:'mainpage'})
+    },
     goSignup() {
       this.$router.push({name:'signup'})
     },
