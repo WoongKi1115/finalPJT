@@ -43,6 +43,7 @@
     <v-main class="v-mains mt-5">
       <router-view :key="$route.fullPath" @login="isLoggedIn = true" />
     </v-main>
+    
   </v-app>
 </template>
 
@@ -56,6 +57,7 @@ export default {
 
   data() {
     return {
+      
       searchKeyword:null,
       isLoggedIn: false,
       movies: [],
